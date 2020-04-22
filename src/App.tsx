@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch} from "react-redux";
+import {fetchQuizes} from "./redux/actions";
 
-function App() {
-  return (
-    <div className="App">
-      <h1>h1 there</h1>
-    </div>
-  );
-}
+export const App = () => {
 
-export default App;
+    const dispatch = useDispatch();
+
+    useEffect((): void => {
+        dispatch(fetchQuizes());
+    });
+
+    return(
+        <h1>hi there</h1>
+    )
+};
+

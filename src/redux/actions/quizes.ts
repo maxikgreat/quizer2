@@ -2,18 +2,20 @@
 import axios from 'axios';
 import {Dispatch} from "redux";
 import {ActionTypes} from "./types";
+import {Quiz} from "../../interfaces/quizes";
 
 export interface FetchQuizesAction {
     type: ActionTypes.fetchQuizes,
-    payload: any;
+    payload: Quiz[];
 }
 
-const rootUrl = 'https://jsonplaceholder.typicode.com';
+const rootUrl = './api';
 
 export const fetchQuizes = () => {
     return async (dispatch: Dispatch) => {
         try {
-            const response = await axios.get(`${rootUrl}/todos`);
+            const response = await axios.get(`${rootUrl}/fetch_quizes.php`);
+            console.log(response.data);
             dispatch<FetchQuizesAction>({
                 type: ActionTypes.fetchQuizes,
                 payload: response.data

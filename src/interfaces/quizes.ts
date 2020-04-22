@@ -17,7 +17,9 @@ export interface QuestionBlock {
 export interface Quiz {
     id: number,
     title: string,
+    description: string,
     questionBlocks: QuestionBlock[],
+    questionCount: number,
     author: string, // USER
     timeCreated: Date, // time created
     bestResult: number

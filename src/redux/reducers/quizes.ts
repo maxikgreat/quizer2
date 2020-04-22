@@ -6,10 +6,13 @@ const initialState = {
     activeQuiz: {}
 };
 
-export const quizesReducer = (state: any = [], action: Action) => {
+export const quizesReducer = (state = initialState, action: Action) => {
     switch (action.type) {
         case ActionTypes.fetchQuizes:
-            return action.payload;
+            return {
+                ...state,
+                quizesList: action.payload
+            };
         default:
             return state;
     }
