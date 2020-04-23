@@ -1,8 +1,11 @@
 import {combineReducers} from "redux";
 import {quizesReducer} from "./quizes";
+import {QuizesState} from "../../interfaces/quizes";
 
-// TODO INTERFACE FOR STATE
+interface SummaryState {
+    quizes: QuizesState
+}
 
-export const reducers = combineReducers({
+export const reducers = combineReducers<SummaryState>({
     quizes: quizesReducer
 });

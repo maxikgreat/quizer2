@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from "react-redux";
-import {fetchQuizes} from "./redux/actions";
+import {fetchQuizes, quizById} from "./redux/actions";
 
 export const App = () => {
 
@@ -11,7 +11,7 @@ export const App = () => {
     });
 
     return(
-        <h1>hi there</h1>
+        <button onClick = {() => dispatch(quizById(1))}>fetch by id</button>
     )
 };
 

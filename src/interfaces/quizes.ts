@@ -18,9 +18,14 @@ export interface Quiz {
     id: number,
     title: string,
     description: string,
-    questionBlocks: QuestionBlock[],
+    //questionBlocks: QuestionBlock[],
     questionCount: number,
     author: string, // USER
     timeCreated: Date, // time created
     bestResult: number
+}
+
+export interface QuizesState {
+    quizesList: Quiz[],
+    questionsOfQuiz: QuestionBlock[]
 }
