@@ -43,7 +43,10 @@ export const QuizCard = ({id, title, description, complexity,
                     <span>Best pass result: <span>{bestResult}</span></span>
                 </div>
                 <p className="card-text">{description}</p>
-                <button className="btn btn-secondary">Start</button>
+                <div className="card-footer">
+                    <button className="btn btn-secondary">Start</button>
+                    <span className="questions">{questionCount} questions</span>
+                </div>
             </div>
         </div>
     )

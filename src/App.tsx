@@ -29,7 +29,11 @@ export const App = () => {
                                />
                            }
                     />
-                    <Route path='/profile' component={Profile} />
+                    <Route path='/profile' render={() =>
+                        <Profile
+
+                        />
+                    } />
                     <Redirect to='/' />
                 </Switch>
             </main>

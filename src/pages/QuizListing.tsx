@@ -30,6 +30,9 @@ export const QuizListing = ({quizesListing, loading}: QuizListingProps) => {
 
     return(
         <div>
+            <div className="jumbotron jumbotron-fluid">
+                <h1 className="display-4">Quiz listing</h1>
+            </div>
             {loading
                 ? <Loader/>
                 : <div className="quizes-container row">

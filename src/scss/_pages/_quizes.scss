@@ -1,3 +1,7 @@
+.jumbotron {
+  padding: 20px;
+  margin: 0;
+}
 .quizes-container {
   width: 100%;
   margin: 0;
@@ -7,6 +11,10 @@
     .card-body {
       border: 2px solid $primary;
       margin: 5px;
+      .card-text {
+        @include box-shadow(0px, 0px, 5px, 1px, $primary, true);
+        padding: 10px 10px 10px 10px;
+      }
       .card-title {
         border-bottom: 2px solid $primary;
         display: flex;
@@ -31,6 +39,19 @@
         justify-content: space-between;
         span > span {
           font-style: italic;
+        }
+      }
+      .card-footer {
+        background: none;
+        padding: 10px 0 10px 0;
+        border-top: 1px solid $primary;
+        button {
+          margin-right: 10px;
+          min-width: 100px;
+        }
+        span {
+          color: $primary;
+          font-weight: bold;
         }
       }
     }
