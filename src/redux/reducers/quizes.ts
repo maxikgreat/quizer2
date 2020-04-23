@@ -3,7 +3,7 @@ import {QuizesState} from "../../interfaces";
 
 const initialState: QuizesState = {
     quizesList: [],
-    questionsOfQuiz: []
+    activeQuiz: null
 };
 
 export const quizesReducer = (state = initialState, action: Action) => {
@@ -12,11 +12,6 @@ export const quizesReducer = (state = initialState, action: Action) => {
             return {
                 ...state,
                 quizesList: action.payload
-            };
-        case ActionTypes.questionsOfQuiz:
-            return {
-                ...state,
-                questionsOfQuiz: action.payload
             };
         default:
             return state;

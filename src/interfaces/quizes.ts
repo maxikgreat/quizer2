@@ -24,7 +24,11 @@ export interface Quiz {
     bestResult: number
 }
 
+export interface ActiveQuiz extends Quiz{
+    questions: QuestionBlock[]
+}
+
 export interface QuizesState {
     quizesList: Quiz[],
-    questionsOfQuiz: QuestionBlock[]
+    activeQuiz: ActiveQuiz | null
 }

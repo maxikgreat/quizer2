@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchQuizes, getQuestionsOfQuiz} from "./redux/actions";
+import {fetchQuizes, getActiveQuiz} from "./redux/actions";
 import {QuizesState, SummaryState} from "./interfaces";
 
 export const App = () => {
@@ -15,7 +15,10 @@ export const App = () => {
     }, [dispatch]);
 
     return(
-        <button onClick = {() => {dispatch(getQuestionsOfQuiz(1))}}>fetch by id</button>
+        <>
+            <h1>Hi there</h1>
+            <button onClick = {() => {dispatch(getActiveQuiz(1))}}>fetch by id</button>
+        </>
     )
 };
 
