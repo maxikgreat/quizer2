@@ -13,6 +13,11 @@ export const quizesReducer = (state = initialState, action: Action) => {
                 ...state,
                 quizesList: action.payload
             };
+        case ActionTypes.getActiveQuiz:
+            return{
+                ...state,
+                activeQuiz: action.payload
+            };
         default:
             return state;
     }

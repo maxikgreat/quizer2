@@ -1,8 +1,8 @@
-import {FetchQuizesAction, QuestionsOfQuizAction} from "./quizes";
+import {FetchQuizesAction, GetActiveQuizAction} from "./quizes";
 
 export enum ActionTypes {
     fetchQuizes = "FETCH_ALL_QUIZES",
-    questionsOfQuiz = "GET_QUESTIONS_OF_QUIZ"
+    getActiveQuiz = "GET_ACTION_QUIZ"
 }
 
-export type Action = FetchQuizesAction | QuestionsOfQuizAction;
+export type Action = FetchQuizesAction | GetActiveQuizAction;

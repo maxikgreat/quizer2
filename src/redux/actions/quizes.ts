@@ -1,7 +1,7 @@
 
 import {Dispatch} from "redux";
 import {ActionTypes} from "./types";
-import {QuestionBlock, Quiz} from "../../interfaces";
+import {ActiveQuiz, Quiz} from "../../interfaces";
 import firebase from "../../firebase";
 
 export interface FetchQuizesAction {
@@ -9,12 +9,10 @@ export interface FetchQuizesAction {
     payload: Quiz[]
 }
 
-export interface QuestionsOfQuizAction {
-    type: ActionTypes.questionsOfQuiz,
-    payload: QuestionBlock[]
+export interface GetActiveQuizAction {
+    type: ActionTypes.getActiveQuiz,
+    payload: ActiveQuiz
 }
-
-const rootUrl = 'https://quizer-5bb95.firebaseio.com/quizes';
 
 export const fetchQuizes = () => {
     return async (dispatch: Dispatch) => {
@@ -25,7 +23,7 @@ export const fetchQuizes = () => {
                 for(let quiz in data){
                     if(data.hasOwnProperty(quiz)){
                         parsedData.push({
-                            id: parseInt(quiz),
+                            id: quiz,
                             title: data[quiz].title,
                             description: data[quiz].description,
                             author: data[quiz].author,
@@ -45,8 +43,27 @@ export const fetchQuizes = () => {
     }
 };
 
-export const getActiveQuiz = (id: number) => {
+export const getActiveQuiz = (id: string) => {
     return async (dispatch: Dispatch) => {
-
+        const response = await firebase.database().ref(`/quizes/${id}`);
+        response.once('value', snapshot => {
+            const data = snapshot.val();
+            console.log(data);
+            dispatch<GetActiveQuizAction>({
+                type: ActionTypes.getActiveQuiz,
+                payload: {
+                    id: id,
+                    title: data.title,
+                    author: data.author,
+                    description: data.description,
+                    questionCount: parseInt(data.questionCount),
+                    questions: data.questions,
+                    timeCreated: data.timeCreated,
+                    bestResult: data.bestResult
+                }
+            })
+        }, errorObject => {
+            console.log(errorObject.message);
+        });
     }
 };

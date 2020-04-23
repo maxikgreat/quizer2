@@ -9,7 +9,6 @@ export const App = () => {
 
     const dispatch = useDispatch();
 
-
     useEffect((): void => {
         dispatch(fetchQuizes());
     }, [dispatch]);
@@ -17,7 +16,7 @@ export const App = () => {
     return(
         <>
             <h1>Hi there</h1>
-            <button onClick = {() => {dispatch(getActiveQuiz(1))}}>fetch by id</button>
+            <button onClick = {() => {dispatch(getActiveQuiz('1'))}}>fetch by id</button>
         </>
     )
 };

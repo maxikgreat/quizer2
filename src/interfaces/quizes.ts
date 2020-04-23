@@ -15,7 +15,7 @@ export interface QuestionBlock {
 }
 
 export interface Quiz {
-    id: number,
+    id: string,
     title: string,
     description: string,
     questionCount: number,
