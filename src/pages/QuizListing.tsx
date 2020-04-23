@@ -23,13 +23,14 @@ export const QuizListing = ({quizesListing, loading}: QuizListingProps) => {
                         created = {quiz.timeCreated}
                         bestResult = {quiz.bestResult}
                         questionCount = {quiz.questionCount}
+                        editable = {false}
                     />
             )
         })
     }
 
     return(
-        <div>
+        <section className="quiz-listing">
             <div className="jumbotron jumbotron-fluid">
                 <h1 className="display-4">Quiz listing</h1>
             </div>
@@ -39,6 +40,6 @@ export const QuizListing = ({quizesListing, loading}: QuizListingProps) => {
                     {renderQuizes()}
                 </div>
             }
-        </div>
+        </section>
     )
 };

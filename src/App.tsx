@@ -29,11 +29,14 @@ export const App = () => {
                                />
                            }
                     />
-                    <Route path='/profile' render={() =>
-                        <Profile
-
-                        />
-                    } />
+                    <Route path='/profile'
+                           render={() =>
+                                <Profile
+                                    quizesListing = {quizes.quizesList}
+                                    loading = {quizes.loading}
+                                />
+                           }
+                    />
                     <Redirect to='/' />
                 </Switch>
             </main>

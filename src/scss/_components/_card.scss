@@ -1,0 +1,57 @@
+.card {
+  padding: 0;
+  border: none;
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 2px solid $primary;
+    margin: 5px;
+    .card-text {
+      @include box-shadow(0px, 0px, 5px, 1px, $primary, true);
+      padding: 10px 10px 10px 10px;
+    }
+    .card-title {
+      border-bottom: 2px solid $primary;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      h3 {
+        font-weight: bold;
+        color: $primary;
+        margin: 0;
+      }
+      .badge {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .card-subtitle {
+      display: flex;
+      justify-content: space-between;
+      span > span {
+        font-style: italic;
+      }
+    }
+    .card-footer {
+      background: none;
+      padding: 10px 0 10px 0;
+      border-top: 1px solid $primary;
+      .buttons-container {
+        display: inline-block;
+      }
+      button {
+        margin-right: 10px;
+        min-width: 100px;
+      }
+      span {
+        color: $primary;
+        font-weight: bold;
+      }
+    }
+  }
+}

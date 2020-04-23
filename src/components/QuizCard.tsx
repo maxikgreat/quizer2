@@ -10,11 +10,12 @@ interface QuizCardProps {
     author: string,
     created: string,
     bestResult: number,
-    questionCount: number
+    questionCount: number,
+    editable: boolean
 }
 
 export const QuizCard = ({id, title, description, complexity,
-                             author, created, bestResult, questionCount}: QuizCardProps) => {
+                             author, created, bestResult, questionCount, editable}: QuizCardProps) => {
 
     function setComplexity(): string {
         switch (complexity) {
@@ -44,8 +45,19 @@ export const QuizCard = ({id, title, description, complexity,
                 </div>
                 <p className="card-text">{description}</p>
                 <div className="card-footer">
-                    <button className="btn btn-secondary">Start</button>
-                    <span className="questions">{questionCount} questions</span>
+                    {editable
+                        ? <>
+                            <div className="buttons-container">
+                                <button className="btn btn-secondary">Edit</button>
+                                <button className="btn btn-danger">Delete</button>
+                            </div>
+                            <span className="questions-xs-hide">{questionCount} questions</span>
+                        </>
+                        : <>
+                            <button className="btn btn-secondary">Start</button>
+                            <span className="questions">{questionCount} questions</span>
+                        </>
+                    }
                 </div>
             </div>
         </div>

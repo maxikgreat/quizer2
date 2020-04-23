@@ -7,9 +7,11 @@
 @import '_mixins/transitions';
 //pages
 @import '_pages/quizes';
+@import '_pages/profile';
 //components
 @import '_components/header';
 @import '_components/loader';
+@import '_components/card';
 
 
 * {
@@ -29,6 +31,11 @@ body {
   main{
     padding: 20px;
   }
+}
+
+.jumbotron {
+  padding: 20px;
+  margin: 0;
 }
 
 button.btn {
