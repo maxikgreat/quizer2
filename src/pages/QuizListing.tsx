@@ -21,6 +21,7 @@ export const QuizListing = ({quizesListing, loading}: QuizListingProps) => {
                         complexity={quiz.complexity}
                         author = {quiz.author}
                         created = {quiz.timeCreated}
+                        bestResult = {quiz.bestResult}
                         questionCount = {quiz.questionCount}
                     />
             )
@@ -31,7 +32,7 @@ export const QuizListing = ({quizesListing, loading}: QuizListingProps) => {
         <div>
             {loading
                 ? <Loader/>
-                : <div className="quizes-container">
+                : <div className="quizes-container row">
                     {renderQuizes()}
                 </div>
             }

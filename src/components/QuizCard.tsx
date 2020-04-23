@@ -8,12 +8,13 @@ interface QuizCardProps {
     description: string,
     complexity: string,
     author: string,
-    created: string
+    created: string,
+    bestResult: number,
     questionCount: number
 }
 
 export const QuizCard = ({id, title, description, complexity,
-                             author, created, questionCount}: QuizCardProps) => {
+                             author, created, bestResult, questionCount}: QuizCardProps) => {
 
     function setComplexity(): string {
         switch (complexity) {
@@ -29,17 +30,20 @@ export const QuizCard = ({id, title, description, complexity,
     }
 
     return(
-        <div className="card">
+        <div className="card col-lg-6">
             <div className="card-body">
-                <h5 className="card-title">{title}</h5>
-                <h6 className="card-subtitle mb-2 text-muted">
+                <div className="card-title">
+                    <h3>{title}</h3>
                     <span
                         className={`badge badge-${setComplexity()}`}
                     >{complexity}</span>
-                </h6>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <button className="btn btn-secondary">Card link</button>
+                </div>
+                <div className="card-subtitle mb-2">
+                    <span>Author: <span>{author}</span></span>
+                    <span>Best pass result: <span>{bestResult}</span></span>
+                </div>
+                <p className="card-text">{description}</p>
+                <button className="btn btn-secondary">Start</button>
             </div>
         </div>
     )

@@ -1,0 +1,34 @@
+
+@include media-breakpoint-down(md) {
+
+}
+
+@include media-breakpoint-down(sm) {
+
+}
+
+@include media-breakpoint-down(xs) {
+
+  header {
+    .navbar {
+      .navbar-brand {
+        width: 70px;
+      }
+    }
+  }
+
+  .quizes-container {
+    .card {
+      .card-body {
+        .card-title {
+          .badge {
+            font-size: 10px;
+          }
+        }
+        .card-subtitle {
+          flex-direction: column;
+        }
+      }
+    }
+  }
+}
