@@ -1,5 +1,5 @@
 import {Action, ActionTypes} from "../actions";
-import {QuizesState} from "../../interfaces/quizes";
+import {QuizesState} from "../../interfaces";
 
 const initialState: QuizesState = {
     quizesList: [],

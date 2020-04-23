@@ -1,9 +1,9 @@
 
 export enum RightAnswer {
-    one,
-    two,
-    three,
-    four
+    one = 1,
+    two = 2,
+    three = 3,
+    four = 4
 }
 
 type Answers = [string, string, string, string];
@@ -18,10 +18,9 @@ export interface Quiz {
     id: number,
     title: string,
     description: string,
-    //questionBlocks: QuestionBlock[],
     questionCount: number,
     author: string, // USER
-    timeCreated: Date, // time created
+    timeCreated: string, // time created
     bestResult: number
 }
 
