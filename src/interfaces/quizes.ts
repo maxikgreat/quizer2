@@ -6,6 +6,12 @@ export enum RightAnswer {
     four = 4
 }
 
+export enum Complexity {
+    easy = 'easy',
+    medium = 'medium',
+    hard = 'hard'
+}
+
 type Answers = [string, string, string, string];
 
 export interface QuestionBlock {
@@ -18,6 +24,7 @@ export interface Quiz {
     id: string,
     title: string,
     description: string,
+    complexity: Complexity,
     questionCount: number,
     author: string, // USER
     timeCreated: string, // time created
@@ -29,6 +36,7 @@ export interface ActiveQuiz extends Quiz{
 }
 
 export interface QuizesState {
+    loading: boolean,
     quizesList: Quiz[],
     activeQuiz: ActiveQuiz | null
 }

@@ -4,6 +4,14 @@ import {ActionTypes} from "./types";
 import {ActiveQuiz, Quiz} from "../../interfaces";
 import firebase from "../../firebase";
 
+export interface ShowLoaderAction {
+    type: ActionTypes.showLoader
+}
+
+export interface HideLoaderAction {
+    type: ActionTypes.hideLoader
+}
+
 export interface FetchQuizesAction {
     type: ActionTypes.fetchQuizes,
     payload: Quiz[]
@@ -16,6 +24,9 @@ export interface GetActiveQuizAction {
 
 export const fetchQuizes = () => {
     return async (dispatch: Dispatch) => {
+        dispatch<ShowLoaderAction>({
+            type: ActionTypes.showLoader
+        });
             const response = await firebase.database().ref('/quizes');
             response.once('value', snapshot => {
                 const data = snapshot.val();
@@ -25,10 +36,11 @@ export const fetchQuizes = () => {
                         parsedData.push({
                             id: quiz,
                             title: data[quiz].title,
-                            description: data[quiz].description,
                             author: data[quiz].author,
-                            timeCreated: data[quiz].timeCreated,
+                            description: data[quiz].description,
+                            complexity: data[quiz].complexity,
                             questionCount: parseInt(data[quiz].questionCount),
+                            timeCreated: data[quiz].timeCreated,
                             bestResult: parseInt(data[quiz].bestResult)
                         });
                     }
@@ -36,10 +48,14 @@ export const fetchQuizes = () => {
                 dispatch<FetchQuizesAction>({
                     type: ActionTypes.fetchQuizes,
                     payload: parsedData
-                })
+                });
+                dispatch<HideLoaderAction>({
+                    type: ActionTypes.hideLoader
+                });
             }, errorObject => {
                 console.log(errorObject.message);
             });
+
     }
 };
 
@@ -56,6 +72,7 @@ export const getActiveQuiz = (id: string) => {
                     title: data.title,
                     author: data.author,
                     description: data.description,
+                    complexity: data.complexity,
                     questionCount: parseInt(data.questionCount),
                     questions: data.questions,
                     timeCreated: data.timeCreated,

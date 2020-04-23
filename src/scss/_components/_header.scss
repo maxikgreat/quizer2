@@ -1,0 +1,11 @@
+header {
+  @include box-shadow(0px, 5px, 5px, 0px, $primary);
+  .navbar {
+    .navbar-brand {
+      width: 100px;
+      a > img {
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,15 +1,32 @@
+//bootstrap
+@import '_bootstrap/variables';
+@import '~bootstrap/scss/bootstrap';
+@import '_bootstrap/bootswatch';
+//mixins
+@import '_mixins/box-shadow';
+@import '_mixins/transitions';
+//pages
+@import '_pages/quizes';
+//components
+@import '_components/header';
+@import '_components/loader';
+
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  &:before,
+  &:after {
+    box-sizing: border-box;
+  }
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  main{
+    padding: 20px;
+  }
 }
