@@ -12,6 +12,13 @@ export enum Complexity {
     hard = 'hard'
 }
 
+export enum Order {
+    default = 'Default',
+    questions = 'Questions',
+    dataCreated = 'Data created',
+    complexity = 'Complexity'
+}
+
 export type Answers = [string, string, string, string];
 
 export interface QuestionBlock {
@@ -27,7 +34,7 @@ export interface Quiz {
     complexity: Complexity,
     questionCount: number,
     author: string, // USER
-    timeCreated: string, // time created
+    timeCreated: Date, // time created
     bestResult: number
 }
 

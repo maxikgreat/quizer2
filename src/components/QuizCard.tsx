@@ -6,12 +6,12 @@ interface QuizCardProps {
     id: string,
     title: string,
     description: string,
-    complexity: string,
+    complexity: Complexity,
     author: string,
-    created: string,
+    created: Date,
     bestResult: number,
     questionCount: number,
-    editable: boolean
+    editable?: boolean
 }
 
 export const QuizCard = ({id, title, description, complexity,

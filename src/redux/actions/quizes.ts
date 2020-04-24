@@ -40,7 +40,7 @@ export const fetchQuizes = () => {
                             description: data[quiz].description,
                             complexity: data[quiz].complexity,
                             questionCount: parseInt(data[quiz].questionCount),
-                            timeCreated: data[quiz].timeCreated,
+                            timeCreated: new Date(data[quiz].timeCreated),
                             bestResult: parseInt(data[quiz].bestResult)
                         });
                     }

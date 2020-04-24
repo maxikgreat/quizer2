@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 
 interface FinderProps {
     title: string,
