@@ -34,4 +34,12 @@
       }
     }
   }
+
+  .order-options-container {
+    flex-direction: column;
+    label {
+      width: 100%;
+      margin: 5px 0 5px 0;
+    }
+  }
 }

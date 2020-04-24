@@ -12,7 +12,7 @@ export enum Complexity {
     hard = 'hard'
 }
 
-type Answers = [string, string, string, string];
+export type Answers = [string, string, string, string];
 
 export interface QuestionBlock {
     question: string,

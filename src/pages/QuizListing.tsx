@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Quiz} from "../interfaces";
 import {Loader} from "../components/Loader";
 import {QuizCard} from "../components/QuizCard";
+import {Finder} from "../components/Finder";
+import {OrderOptions} from "../components/OrderOptions";
 
 interface QuizListingProps {
     quizesListing: Quiz[],
@@ -10,8 +12,17 @@ interface QuizListingProps {
 
 export const QuizListing = ({quizesListing, loading}: QuizListingProps) => {
 
+    const [finder, setFinder] = useState('');
+
     function renderQuizes() {
-        return quizesListing.map((quiz: Quiz): JSX.Element => {
+
+        const filtered = quizesListing.filter((quiz: Quiz) => {
+            if ((finder.substring(0, finder.length).toLowerCase() === quiz.title.substring(0, finder.length).toLowerCase())) {
+                return quiz
+            }
+        });
+
+        return filtered.map((quiz: Quiz): JSX.Element => {
             return(
                     <QuizCard
                         key={quiz.id}
@@ -32,7 +43,13 @@ export const QuizListing = ({quizesListing, loading}: QuizListingProps) => {
     return(
         <section className="quiz-listing">
             <div className="jumbotron jumbotron-fluid">
-                <h1 className="display-4">Quiz listing</h1>
+                <h1 className="display-4 mb-3">Quiz listing</h1>
+                <OrderOptions/>
+                <Finder
+                    title="Find quiz"
+                    finder={finder}
+                    setFinder={setFinder}
+                />
             </div>
             {loading
                 ? <Loader/>

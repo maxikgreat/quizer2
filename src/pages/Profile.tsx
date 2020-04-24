@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Quiz} from '../interfaces'
 import {Loader} from "../components/Loader";
 import {QuizCard} from "../components/QuizCard";
+import {OrderOptions} from "../components/OrderOptions";
+import {Finder} from "../components/Finder";
 
 interface ProfileProps {
     quizesListing: Quiz[],
@@ -9,6 +11,8 @@ interface ProfileProps {
 }
 
 export const Profile = ({quizesListing, loading}: ProfileProps) => {
+
+    const [finder, setFinder] = useState('');
 
     function renderQuizes() {
         return quizesListing.map((quiz: Quiz): JSX.Element => {
@@ -32,7 +36,13 @@ export const Profile = ({quizesListing, loading}: ProfileProps) => {
     return(
         <section className="profile">
             <div className="jumbotron jumbotron-fluid">
-                <h1 className="display-4">Welcome, <span className="text-primary">bla bla</span></h1>
+                <h1 className="display-4 mb-3">Welcome, <span className="text-primary">bla bla</span></h1>
+                <OrderOptions/>
+                <Finder
+                    title="Find quiz"
+                    finder={finder}
+                    setFinder={setFinder}
+                />
             </div>
             {loading
                 ? <Loader/>

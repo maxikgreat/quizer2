@@ -9,7 +9,7 @@ import {fetchQuizes} from "./redux/actions";
 
 export const App = () => {
 
-    const quizes:QuizesState = useSelector((state: SummaryState) => state.quizes);
+    const quizes: QuizesState = useSelector((state: SummaryState) => state.quizes);
     const dispatch = useDispatch();
 
     useEffect(() => {
