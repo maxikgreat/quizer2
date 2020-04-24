@@ -1,8 +1,10 @@
-import React, {useState} from 'react'
-import {Quiz} from '../interfaces'
+import React, {useState} from 'react';
+import {Quiz} from '../interfaces';
+import {Link} from "react-router-dom";
 import {Loader} from "../components/UI/Loader";
 import {QuizCard} from "../components/QuizCard";
 import {Finder} from "../components/Finder";
+import {filter} from "../helpFunctions";
 
 interface ProfileProps {
     quizesListing: Quiz[],
@@ -14,7 +16,9 @@ export const Profile = ({quizesListing, loading}: ProfileProps) => {
     const [finder, setFinder] = useState<string>('');
 
     function renderQuizes() {
-        return quizesListing.map((quiz: Quiz): JSX.Element => {
+        const filtered = filter(finder, quizesListing);
+
+        return filtered.map((quiz: Quiz): JSX.Element => {
             return(
                 <QuizCard
                     key={quiz.id}
@@ -35,7 +39,10 @@ export const Profile = ({quizesListing, loading}: ProfileProps) => {
     return(
         <section className="profile">
             <div className="jumbotron jumbotron-fluid">
-                <h1 className="display-4 mb-3">Welcome, <span className="text-primary">bla bla</span></h1>
+                <div className="jumbotron-title mb-3">
+                    <h1 className="display-4">Welcome, <span className="text-primary">bla bla</span></h1>
+                    <Link to="/quiz-creator" className="btn btn-primary">Create quiz</Link>
+                </div>
                 <Finder
                     title="Find quiz"
                     finder={finder}

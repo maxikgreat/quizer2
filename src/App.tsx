@@ -6,6 +6,7 @@ import {Profile} from "./pages/Profile";
 import {useDispatch, useSelector} from "react-redux";
 import {QuizesState, SummaryState} from "./interfaces";
 import {fetchQuizes} from "./redux/actions";
+import {QuizCreator} from "./pages/QuizCreator";
 
 export const App = () => {
 
@@ -37,6 +38,7 @@ export const App = () => {
                                 />
                            }
                     />
+                    <Route path='/quiz-creator' component={QuizCreator} />
                     <Redirect to='/' />
                 </Switch>
             </main>

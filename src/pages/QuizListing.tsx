@@ -42,7 +42,9 @@ export const QuizListing = ({quizesListing, loading}: QuizListingProps) => {
     return(
         <section className="quiz-listing">
             <div className="jumbotron jumbotron-fluid">
-                <h1 className="display-4 mb-3">Quiz listing</h1>
+                <div className="jumbotron-title mb-3">
+                    <h1 className="display-4">Quiz listing</h1>
+                </div>
                 <OrderOptions
                     order={order}
                     setOrder={setOrder}

@@ -35,9 +35,30 @@ body {
   }
 }
 
+a {
+  color: $white;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .jumbotron {
   padding: 20px;
   margin: 5px;
+  .jumbotron-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h1 {
+      margin: 0;
+    }
+    a {
+      padding: 10px;
+      text-transform: uppercase;
+      color: $white;
+      font-weight: bold;
+    }
+  }
 }
 
 button.btn {

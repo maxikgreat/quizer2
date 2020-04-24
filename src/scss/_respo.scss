@@ -4,10 +4,26 @@
 }
 
 @include media-breakpoint-down(sm) {
-
+  .jumbotron {
+    .jumbotron-title {
+      h1 {
+        font-size: 40px;
+      }
+    }
+  }
 }
 
 @include media-breakpoint-down(xs) {
+  .jumbotron {
+    .jumbotron-title {
+      h1 {
+        font-size: 30px;
+      }
+      a {
+        font-size: 13px;
+      }
+    }
+  }
 
   header {
     .navbar {
@@ -36,6 +52,12 @@
           display: none;
         }
       }
+    }
+  }
+
+  .order-options-header {
+    h3 {
+      font-size: 20px;
     }
   }
 
