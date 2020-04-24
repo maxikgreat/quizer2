@@ -1,43 +1,48 @@
 import React from 'react';
-import {Order} from "../interfaces";
+import {OrderDirection, OrderFull, OrderType} from "../interfaces";
 import {OrderOpt} from "./OrderOpt";
+import {Switcher} from "./UI/Switcher";
 
 interface OrderOptionsProps {
-    orderType: Order,
-    setOrder(type: Order): void
+    order: OrderFull,
+    setOrder(order: OrderFull): void
 }
 
-export const OrderOptions = ({orderType, setOrder}: OrderOptionsProps) => {
+export const OrderOptions = ({order, setOrder}: OrderOptionsProps) => {
 
     const onChangeHandler = (e: {target: HTMLInputElement}) => {
         switch(e.target.value){
-            case 'default':
-                setOrder(Order.default);
+            case 'dataCreated':
+                setOrder({...order, type: OrderType.dataCreated});
                 break;
             case 'questions':
-                setOrder(Order.questions);
-                break;
-            case 'dataCreated':
-                setOrder(Order.dataCreated);
+                setOrder({...order, type: OrderType.questions});
                 break;
             case 'complexity':
-                setOrder(Order.complexity);
-                break;
-            default:
-                setOrder(Order.default);
+                setOrder({...order, type: OrderType.complexity});
                 break;
         }
     };
 
+    const onSwitchOrder = (): void => {
+        if(order.direction === OrderDirection.asc) {
+            setOrder({...order, direction: OrderDirection.desc})
+            return
+        } else {
+            setOrder({...order, direction: OrderDirection.asc})
+            return
+        }
+    }
+
     function renderOpts() {
-        return Object.keys(Order).map((opt, index): JSX.Element => {
+        return Object.keys(OrderType).map((opt, index): JSX.Element => {
             return (
                 <OrderOpt
                     key={index}
                     // @ts-ignore
-                    valueToShow={Order[opt as any]}
-                    value={opt as Order}
-                    orderType={orderType}
+                    valueToShow={OrderType[opt as any]}
+                    value={opt as OrderType}
+                    orderType={order.type}
                     onChangeHandler={onChangeHandler}
                 />
             )
@@ -46,7 +51,13 @@ export const OrderOptions = ({orderType, setOrder}: OrderOptionsProps) => {
 
     return(
         <>
-            <h3>Order by: </h3>
+            <div className="order-options-header">
+                <h3>Order by: </h3>
+                <Switcher
+                    optionsLabel={order.direction}
+                    onSwitchHandler={onSwitchOrder}
+                />
+            </div>
             <div className="order-options-container btn-group btn-group-toggle">
                 {renderOpts()}
             </div>

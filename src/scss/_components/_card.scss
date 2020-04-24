@@ -33,6 +33,23 @@
     .card-subtitle {
       display: flex;
       justify-content: space-between;
+      span:nth-child(1) {
+        display: flex;
+        justify-content: flex-start;
+      }
+      span:nth-child(2) {
+        display: flex;
+        justify-content: center;
+      }
+      span:nth-child(3) {
+        display: flex;
+        justify-content: flex-end;
+      }
+      span {
+        font-size: 13px;
+        font-weight: bold;
+        width: 33.3%;
+      }
       span > span {
         font-style: italic;
       }

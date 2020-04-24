@@ -27,6 +27,10 @@
         }
         .card-subtitle {
           flex-direction: column;
+          span {
+            width: 100%;
+            margin-top: 5px;
+          }
         }
         .questions-xs-hide {
           display: none;

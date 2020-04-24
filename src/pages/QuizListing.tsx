@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {Order, Quiz} from "../interfaces";
-import {Loader} from "../components/Loader";
+import {Quiz, OrderDirection, OrderType, OrderFull} from "../interfaces";
+import {Loader} from "../components/UI/Loader";
 import {QuizCard} from "../components/QuizCard";
 import {Finder} from "../components/Finder";
 import {OrderOptions} from "../components/OrderOptions";
-import {sort} from "../helpFunctions/sort";
+import {sort, filter} from "../helpFunctions";
 
 interface QuizListingProps {
     quizesListing: Quiz[],
@@ -13,20 +13,14 @@ interface QuizListingProps {
 
 export const QuizListing = ({quizesListing, loading}: QuizListingProps) => {
 
-    const [finder, setFinder] = useState('');
-    const [orderType, setOrder] = useState(Order.default);
+    const [finder, setFinder] = useState<string>('');
+    const [order, setOrder] = useState<OrderFull>({type: OrderType.dataCreated, direction: OrderDirection.asc});
 
     function renderQuizes() {
+        const tempQuizesList = [...quizesListing];
 
-        const sorted = sort(orderType, quizesListing);
-
-        const filtered = sorted.filter((quiz: Quiz): Quiz | null => {
-            if ((finder.substring(0, finder.length).toLowerCase() === quiz.title.substring(0, finder.length).toLowerCase())) {
-                return quiz
-            } else {
-                return null
-            }
-        });
+        const sorted = sort(order, tempQuizesList);
+        const filtered = filter(finder, sorted);
 
         return filtered.map((quiz: Quiz): JSX.Element => {
             return(
@@ -37,7 +31,7 @@ export const QuizListing = ({quizesListing, loading}: QuizListingProps) => {
                         description = {quiz.description}
                         complexity={quiz.complexity}
                         author = {quiz.author}
-                        created = {quiz.timeCreated}
+                        timeCreated = {quiz.timeCreated}
                         bestResult = {quiz.bestResult}
                         questionCount = {quiz.questionCount}
                     />
@@ -50,7 +44,7 @@ export const QuizListing = ({quizesListing, loading}: QuizListingProps) => {
             <div className="jumbotron jumbotron-fluid">
                 <h1 className="display-4 mb-3">Quiz listing</h1>
                 <OrderOptions
-                    orderType={orderType}
+                    order={order}
                     setOrder={setOrder}
                 />
                 <Finder

@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
-import {Quiz, Order} from '../interfaces'
-import {Loader} from "../components/Loader";
+import {Quiz} from '../interfaces'
+import {Loader} from "../components/UI/Loader";
 import {QuizCard} from "../components/QuizCard";
-import {OrderOptions} from "../components/OrderOptions";
 import {Finder} from "../components/Finder";
 
 interface ProfileProps {
@@ -12,8 +11,7 @@ interface ProfileProps {
 
 export const Profile = ({quizesListing, loading}: ProfileProps) => {
 
-    const [finder, setFinder] = useState('');
-    const [orderType, setOrder] = useState(Order.default);
+    const [finder, setFinder] = useState<string>('');
 
     function renderQuizes() {
         return quizesListing.map((quiz: Quiz): JSX.Element => {
@@ -25,7 +23,7 @@ export const Profile = ({quizesListing, loading}: ProfileProps) => {
                     description = {quiz.description}
                     complexity={quiz.complexity}
                     author = {quiz.author}
-                    created = {quiz.timeCreated}
+                    timeCreated = {quiz.timeCreated}
                     bestResult = {quiz.bestResult}
                     questionCount = {quiz.questionCount}
                     editable = {true}
@@ -38,9 +36,6 @@ export const Profile = ({quizesListing, loading}: ProfileProps) => {
         <section className="profile">
             <div className="jumbotron jumbotron-fluid">
                 <h1 className="display-4 mb-3">Welcome, <span className="text-primary">bla bla</span></h1>
-                {/*<OrderOptions*/}
-                {/*    setOrder={setOrder}*/}
-                {/*/>*/}
                 <Finder
                     title="Find quiz"
                     finder={finder}

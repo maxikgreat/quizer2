@@ -1,5 +1,6 @@
 import React from 'react';
 import {Complexity} from "../interfaces";
+import {getMonthName} from "../helpFunctions";
 
 interface QuizCardProps {
     key: string,
@@ -8,14 +9,14 @@ interface QuizCardProps {
     description: string,
     complexity: Complexity,
     author: string,
-    created: Date,
+    timeCreated: Date,
     bestResult: number,
     questionCount: number,
     editable?: boolean
 }
 
 export const QuizCard = ({id, title, description, complexity,
-                             author, created, bestResult, questionCount, editable}: QuizCardProps) => {
+                             author, timeCreated, bestResult, questionCount, editable}: QuizCardProps) => {
 
     function setComplexity(): string {
         switch (complexity) {
@@ -30,6 +31,10 @@ export const QuizCard = ({id, title, description, complexity,
         }
     }
 
+    function setDateCreated(): string {
+        return `${timeCreated.getHours()}:${timeCreated.getMinutes()}:${timeCreated.getSeconds()} | ${timeCreated.getDay()} ${getMonthName(timeCreated)} ${timeCreated.getFullYear()}`
+    }
+
     return(
         <div className="card col-lg-6">
             <div className="card-body">
@@ -40,8 +45,9 @@ export const QuizCard = ({id, title, description, complexity,
                     >{complexity}</span>
                 </div>
                 <div className="card-subtitle mb-2">
-                    <span>Author: <span>{author}</span></span>
-                    <span>Best pass result: <span>{bestResult}</span></span>
+                    <span>Author: {author}</span>
+                    <span>{setDateCreated()}</span>
+                    <span>Best pass result: {bestResult}</span>
                 </div>
                 <p className="card-text">{description}</p>
                 <div className="card-footer">

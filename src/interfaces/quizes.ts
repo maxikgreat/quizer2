@@ -12,11 +12,20 @@ export enum Complexity {
     hard = 'hard'
 }
 
-export enum Order {
-    default = 'Default',
-    questions = 'Questions',
+export enum OrderType {
     dataCreated = 'Data created',
+    questions = 'Questions',
     complexity = 'Complexity'
+}
+
+export enum OrderDirection {
+    asc,
+    desc
+}
+
+export interface OrderFull {
+    type: OrderType,
+    direction: OrderDirection
 }
 
 export type Answers = [string, string, string, string];

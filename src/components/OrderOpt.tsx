@@ -1,10 +1,10 @@
 import React from 'react';
-import {Order} from "../interfaces";
+import {OrderType} from "../interfaces";
 
 interface OrderOptProps {
     valueToShow: string,
-    value: Order,
-    orderType: Order,
+    value: OrderType,
+    orderType: OrderType,
     onChangeHandler(e: {target: HTMLInputElement}): void
 }
 
