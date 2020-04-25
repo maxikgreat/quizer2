@@ -14,7 +14,15 @@
 }
 
 @include media-breakpoint-down(xs) {
+  body main {
+    padding: 0;
+  }
   section.quiz-creator-container {
+    .error-text {
+      width: 100%;
+      display: block;
+      margin-top: 5px;
+    }
     h2 {
       font-size: 25px;
     }

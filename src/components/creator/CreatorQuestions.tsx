@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {NewQuestionBlocks, NewQuestionBlock, RightAnswer} from "../../interfaces";
 import {CreatorAnswer} from "./CreatorAnswer";
 import {validateQuestion} from "../../validate";
@@ -14,8 +14,18 @@ export const CreatorQuestions = () => {
             wasAdded: false
         }],
         activeQuestion: 0,
-        limit: 2
+        limit: 30
     })
+
+    useEffect(() => {
+        if(localStorage['listing']){
+            const listingFromLocalStore: NewQuestionBlock[] = JSON.parse(localStorage['listing']);
+            setQuestions({
+                ...questions,
+                listing: listingFromLocalStore
+            })
+        }
+    }, [])
 
     const onChangeInput = (inputName: string, value: string, index?: number) => {
         const tempListing = questions.listing;
@@ -43,7 +53,9 @@ export const CreatorQuestions = () => {
     }
 
     const onCheckQuestionHandler = (): void => {
-
+        if(questions.listing[questions.activeQuestion].wasAdded){
+            return
+        }
         setQuestions({
             ...questions,
             errors: {}
@@ -83,6 +95,7 @@ export const CreatorQuestions = () => {
                     activeQuestion: questions.activeQuestion + 1,
                     errors: {}
                 })
+                localStorage['listing'] = JSON.stringify(questions.listing);
             }
         }
     };
@@ -200,7 +213,7 @@ export const CreatorQuestions = () => {
             return Object.values(questions.errors as Object).map((error: string, index: number): JSX.Element => {
                 return(
                     <span
-                        className="text-danger mr-2"
+                        className="text-danger mr-2 error-text"
                         key={index}
                     >{error}</span>
                 )
@@ -231,18 +244,13 @@ export const CreatorQuestions = () => {
                     {renderAnswers()}
                 </div>
                 <div className="mt-3">
-                    {
-                        questions.listing[questions.activeQuestion].wasAdded
-                        ? <button
-                                className="btn btn-primary mr-2"
-                                onClick={() => onCheckQuestionHandler()}
-                            >Update question
-                        </button>
-                            : <button
-                                className="btn btn-primary mr-2"
-                                onClick={() => onCheckQuestionHandler()}
-                            >Add question</button>
-                    }
+                    <button
+                        className={questions.listing[questions.activeQuestion].wasAdded
+                            ? "btn btn-primary mr-2 disabled"
+                            : "btn btn-primary mr-2"
+                        }
+                        onClick={() => onCheckQuestionHandler()}
+                    >Add question</button>
                     <button
                         className="btn btn-danger mr-2"
                         onClick={() => onDeleteQuestion()}
