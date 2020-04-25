@@ -31,7 +31,7 @@ export type Answers = [string, string, string, string];
 export interface QuestionBlock {
     question: string,
     answers: Answers,
-    rightAnswer: RightAnswer | unknown;
+    rightAnswer: RightAnswer | undefined;
 }
 
 export interface Quiz {
@@ -58,9 +58,14 @@ export interface NewQuiz {
     errors?: ValidateErrorsMain
 }
 
+export interface NewQuestionBlock extends QuestionBlock{
+    wasAdded: boolean
+}
+
 export interface NewQuestionBlocks {
-    listing: QuestionBlock[],
+    listing: NewQuestionBlock[],
     activeQuestion: number,
+    limit: number,
     errors?: ValidateErrorQuestion
 }
 

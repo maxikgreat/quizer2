@@ -5,7 +5,7 @@ import {RightAnswer} from "../../interfaces";
 interface CreatorAnswerProps {
     index: number,
     value: string,
-    activeIndex: RightAnswer | unknown,
+    activeIndex: RightAnswer | undefined,
     onChangeInput(inputName: string, value: string, index?: number): void,
     onChangeRightAnswer(indexOfAnswer: RightAnswer): void
 }

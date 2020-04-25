@@ -2,7 +2,7 @@ import {NewQuiz} from "../interfaces";
 
 export interface ValidateErrorsMain {
     title?: string,
-    description?: string
+    description?: string,
 }
 
 export function validateMain(inputs: NewQuiz): ValidateErrorsMain {
