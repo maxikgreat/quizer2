@@ -24,7 +24,7 @@ export const CreatorQuestions = ({newQuiz, setNewQuizState}: CreatorQuestionsPro
 
     useEffect(() => {
         loadQuestionToMainState()
-    }, [questions.listing[questions.activeQuestion]])
+    }, [questions.listing[questions.activeQuestion], questions.listing])
 
     const onChangeInput = (inputName: string, value: string, index?: number) => {
         const tempListing = questions.listing;
@@ -231,6 +231,12 @@ export const CreatorQuestions = ({newQuiz, setNewQuizState}: CreatorQuestionsPro
                 ...newQuiz,
                 questions: readyQuestions,
                 questionCount: readyQuestions.length
+            })
+        } else {
+            setNewQuizState({
+                ...newQuiz,
+                questions: [],
+                questionCount: 0
             })
         }
     }
