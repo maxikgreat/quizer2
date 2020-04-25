@@ -1,10 +1,7 @@
-import {ValidateErrors} from "../helpFunctions";
+import {ValidateErrorQuestion, ValidateErrorsMain} from "../validate";
 
 export enum RightAnswer {
-    one = 'one',
-    two = 'two',
-    three = 'three',
-    four = 'four'
+    one, two, three, four
 }
 
 export enum Complexity {
@@ -58,7 +55,13 @@ export interface NewQuiz {
     complexity: Complexity,
     questions?: QuestionBlock[]
     questionCount?: number,
-    errors?: ValidateErrors
+    errors?: ValidateErrorsMain
+}
+
+export interface NewQuestionBlocks {
+    listing: QuestionBlock[],
+    activeQuestion: number,
+    errors?: ValidateErrorQuestion
 }
 
 export interface QuizesState {

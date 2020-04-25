@@ -2,6 +2,10 @@ section.quiz-creator-container {
   h2 {
     color: $primary;
     margin-top: 1rem;
+    font-weight: bold;
+    &:after {
+
+    }
   }
   .form-group {
     margin-bottom: 0;

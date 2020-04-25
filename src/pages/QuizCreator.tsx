@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import {CreatorMainInfo} from "../components/creator/CreatorMainInfo";
 import {Link} from "react-router-dom";
 import {Complexity, NewQuiz} from "../interfaces";
-import {validateRules, isEmptyObject} from "../helpFunctions";
+import {isEmptyObject} from "../helpFunctions";
 import {CreatorQuestions} from "../components/creator/CreatorQuestions";
+import {validateMain} from "../validate";
 
 export const QuizCreator = () => {
 
@@ -14,7 +15,7 @@ export const QuizCreator = () => {
     });
 
     const checkInputs = (): void => {
-        const errors = validateRules(newQuiz);
+        const errors = validateMain(newQuiz);
         if(!isEmptyObject(errors)) {
             setNewQuizState({
                 ...newQuiz,

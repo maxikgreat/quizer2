@@ -1,13 +1,13 @@
 import {NewQuiz} from "../interfaces";
 
-export interface ValidateErrors {
+export interface ValidateErrorsMain {
     title?: string,
     description?: string
 }
 
-export function validateRules(inputs: NewQuiz): ValidateErrors {
+export function validateMain(inputs: NewQuiz): ValidateErrorsMain {
 
-    let errors: ValidateErrors = {};
+    let errors: ValidateErrorsMain = {};
 
     if(!inputs.title) {
         errors.title = 'This field is required!';

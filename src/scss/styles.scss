@@ -16,7 +16,6 @@
 @import '_components/orderOptions';
 @import '_components/switcher';
 
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -38,6 +37,11 @@ body {
     }
   }
 }
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: $secondary;
+  border-color: $secondary;
+}
 
 .wrapper-bg {
   margin: 5px;
@@ -57,7 +61,6 @@ a {
   color: $white;
   font-weight: bold;
 }
-
 
 .jumbotron {
   padding: 20px;
@@ -81,6 +84,5 @@ a {
 button.btn {
   font-weight: bold;
 }
-
 
 @import 'respo';

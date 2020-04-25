@@ -1,16 +1,13 @@
 
 import React, {useState} from 'react';
-import {QuestionBlock, RightAnswer} from "../../interfaces";
+import {NewQuestionBlocks, RightAnswer} from "../../interfaces";
 import {CreatorAnswer} from "./CreatorAnswer";
-
-interface QuestionsCreate {
-    listing: QuestionBlock[],
-    activeQuestion: number
-}
+import {validateQuestion} from "../../validate";
+import {isEmptyObject} from "../../helpFunctions";
 
 export const CreatorQuestions = () => {
 
-    const [questions, setQuestions] = useState<QuestionsCreate>({
+    const [questions, setQuestions] = useState<NewQuestionBlocks>({
         listing: [{
             question: '',
             answers: ['', '', '', ''],
@@ -20,7 +17,6 @@ export const CreatorQuestions = () => {
     })
 
     const onChangeInput = (inputName: string, value: string, index?: number) => {
-
         const tempListing = questions.listing;
 
         if(inputName === 'question'){
@@ -35,18 +31,42 @@ export const CreatorQuestions = () => {
         })
     }
 
+    const onChangeRightAnswer = (indexOfAnswer: RightAnswer) => {
+        const tempListing = questions.listing;
+
+        tempListing[questions.activeQuestion].rightAnswer = indexOfAnswer;
+        setQuestions({
+            ...questions,
+            listing: [...tempListing]
+        })
+    }
+
     const onCheckQuestionHandler = (): void => {
-        console.log(questions);
+        const errors = validateQuestion(questions.listing[questions.activeQuestion]);
+
+        if(!isEmptyObject(errors)) {
+            setQuestions({
+                ...questions,
+                errors: errors
+            })
+        } else {
+            setQuestions({
+                ...questions,
+                errors: {}
+            })
+        }
     };
 
     function renderAnswers() {
-        return Object.keys(RightAnswer).map((value, index): JSX.Element => {
+        return questions.listing[questions.activeQuestion].answers.map((value, index): JSX.Element => {
             return (
                 <CreatorAnswer
-                    key={value}
+                    key={index.toString()}
                     index={index}
                     value={questions.listing[questions.activeQuestion].answers[index]}
+                    activeIndex={questions.listing[questions.activeQuestion].rightAnswer}
                     onChangeInput={onChangeInput}
+                    onChangeRightAnswer={onChangeRightAnswer}
                 />
             )
         })
@@ -77,7 +97,9 @@ export const CreatorQuestions = () => {
                         onClick={() => onCheckQuestionHandler()}
                     >Add question</button>
                     <button className="btn btn-danger mr-2">Delete</button>
-                    <button className="btn btn-danger">Delete all</button>
+                    <button className="btn btn-danger mr-2">Delete all</button>
+                    <span className="text-danger mr-2">{questions.errors?.textInputs}</span>
+                    <span className="text-danger mr-2">{questions.errors?.rightAnswer}</span>
                 </div>
             </div>
         </div>
