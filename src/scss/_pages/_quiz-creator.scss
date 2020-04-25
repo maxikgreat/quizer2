@@ -1,0 +1,19 @@
+section.quiz-creator-container {
+  h2 {
+    color: $primary;
+    margin-top: 1rem;
+  }
+  .form-group {
+    margin-bottom: 0;
+  }
+  .main-info-container {
+    padding: 10px;
+    background-color: #eee;
+    margin: 5px;
+  }
+  .complexity-buttons-container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+  }
+}

@@ -51,6 +51,18 @@ export interface ActiveQuiz extends Quiz{
     questions: QuestionBlock[]
 }
 
+export interface NewQuiz {
+    id?: string,
+    title?: string,
+    description?: string,
+    complexity?: Complexity,
+    questions?: QuestionBlock[]
+    questionCount?: number,
+    author?: string, // USER
+    timeCreated?: Date, // time created
+    bestResult?: number
+}
+
 export interface QuizesState {
     loading: boolean,
     quizesList: Quiz[],

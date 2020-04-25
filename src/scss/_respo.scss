@@ -14,6 +14,11 @@
 }
 
 @include media-breakpoint-down(xs) {
+  section.quiz-creator-container {
+    h2 {
+      font-size: 25px;
+    }
+  }
   .jumbotron {
     .jumbotron-title {
       h1 {
