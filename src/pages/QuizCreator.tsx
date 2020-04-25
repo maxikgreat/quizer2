@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {CreatorMainInfo} from "../components/CreatorMainInfo";
+import {CreatorMainInfo} from "../components/creator/CreatorMainInfo";
 import {Link} from "react-router-dom";
 import {Complexity, NewQuiz} from "../interfaces";
-import {validateRules} from "../helpFunctions/validateRules";
-import {isEmptyObject} from "../helpFunctions/isEmptyObject";
+import {validateRules, isEmptyObject} from "../helpFunctions";
+import {CreatorQuestions} from "../components/creator/CreatorQuestions";
 
 export const QuizCreator = () => {
 
@@ -30,7 +30,7 @@ export const QuizCreator = () => {
 
     return(
         <section className="quiz-creator-container">
-            <div className="jumbotron jumbotron-fluid">
+            <div className="jumbotron jumbotron-fluid wrapper-bg">
                 <div className="jumbotron-title mb-3">
                     <h1 className="display-4">Quiz creator</h1>
                     <div className="buttons-container">
@@ -48,6 +48,9 @@ export const QuizCreator = () => {
             <CreatorMainInfo
                 newQuiz={newQuiz}
                 setNewQuizState={setNewQuizState}
+            />
+            <CreatorQuestions
+
             />
         </section>
     )

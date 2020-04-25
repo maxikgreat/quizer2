@@ -1,5 +1,5 @@
 import React from 'react';
-import {Complexity, NewQuiz} from "../interfaces";
+import {Complexity, NewQuiz} from "../../interfaces";
 
 interface CreatorMainInfoProps {
     newQuiz: NewQuiz,
@@ -7,7 +7,6 @@ interface CreatorMainInfoProps {
 }
 
 export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps) => {
-
     const setProgress = (): {width: number, color: string}=> {
         if(newQuiz.complexity === Complexity.easy) {
             return {
@@ -28,7 +27,7 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
     }
 
     return(
-        <div className="main-info-container">
+        <div className="main-info-container wrapper-bg">
             <div className="form-group row">
                 <div className="col-lg-6 col-12">
                     <h2>Title</h2>

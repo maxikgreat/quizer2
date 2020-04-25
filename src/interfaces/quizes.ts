@@ -1,10 +1,10 @@
-import {ValidateErrors} from "../helpFunctions/validateRules";
+import {ValidateErrors} from "../helpFunctions";
 
 export enum RightAnswer {
-    one = 1,
-    two = 2,
-    three = 3,
-    four = 4
+    one = 'one',
+    two = 'two',
+    three = 'three',
+    four = 'four'
 }
 
 export enum Complexity {
@@ -34,7 +34,7 @@ export type Answers = [string, string, string, string];
 export interface QuestionBlock {
     question: string,
     answers: Answers,
-    rightAnswer: RightAnswer
+    rightAnswer: RightAnswer | unknown;
 }
 
 export interface Quiz {

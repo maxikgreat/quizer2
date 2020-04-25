@@ -33,7 +33,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   main{
     padding: 20px;
+    section {
+      padding-bottom: 100px;
+    }
   }
+}
+
+.wrapper-bg {
+  margin: 5px;
+  background: #eee;
 }
 
 a {
@@ -53,7 +61,7 @@ a {
 
 .jumbotron {
   padding: 20px;
-  margin: 5px;
+  margin-bottom: 0px;
   .jumbotron-title {
     display: flex;
     justify-content: space-between;
@@ -61,6 +69,12 @@ a {
     h1 {
       margin: 0;
     }
+  }
+}
+
+.input-group-prepend {
+  button.btn {
+    font-weight: normal;
   }
 }
 
