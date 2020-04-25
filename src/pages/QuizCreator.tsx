@@ -12,9 +12,11 @@ export const QuizCreator = () => {
         title: '',
         description: '',
         complexity: Complexity.medium,
+        questions: [],
+        questionCount: 0
     });
 
-    const checkInputs = (): void => {
+    const checkQuizValidation = (): void => {
         const errors = validateMain(newQuiz);
         if(!isEmptyObject(errors)) {
             setNewQuizState({
@@ -31,6 +33,7 @@ export const QuizCreator = () => {
 
     return(
         <section className="quiz-creator-container">
+            {console.log(newQuiz.questions)}
             <div className="jumbotron jumbotron-fluid wrapper-bg">
                 <div className="jumbotron-title mb-3">
                     <h1 className="display-4">Quiz creator</h1>
@@ -41,7 +44,7 @@ export const QuizCreator = () => {
                         >Cancel</Link>
                         <button
                             className="btn btn-primary btn-big"
-                            onClick={() => checkInputs()}
+                            onClick={() => checkQuizValidation()}
                         >Create</button>
                     </div>
                 </div>
@@ -51,7 +54,8 @@ export const QuizCreator = () => {
                 setNewQuizState={setNewQuizState}
             />
             <CreatorQuestions
-
+                newQuiz={newQuiz}
+                setNewQuizState={setNewQuizState}
             />
         </section>
     )

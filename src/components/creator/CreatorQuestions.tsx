@@ -1,11 +1,16 @@
 
 import React, {useState, useEffect} from 'react';
-import {NewQuestionBlocks, NewQuestionBlock, RightAnswer} from "../../interfaces";
+import {NewQuestionBlocks, NewQuestionBlock, RightAnswer, NewQuiz, QuestionBlock} from "../../interfaces";
 import {CreatorAnswer} from "./CreatorAnswer";
 import {validateQuestion} from "../../validate";
 import {isEmptyObject} from "../../helpFunctions";
 
-export const CreatorQuestions = () => {
+interface CreatorQuestionsProps {
+    newQuiz: NewQuiz,
+    setNewQuizState(newQuiz: NewQuiz): void,
+}
+
+export const CreatorQuestions = ({newQuiz, setNewQuizState}: CreatorQuestionsProps) => {
     const [questions, setQuestions] = useState<NewQuestionBlocks>({
         listing: [{
             question: '',
@@ -18,14 +23,8 @@ export const CreatorQuestions = () => {
     })
 
     useEffect(() => {
-        if(localStorage['listing']){
-            const listingFromLocalStore: NewQuestionBlock[] = JSON.parse(localStorage['listing']);
-            setQuestions({
-                ...questions,
-                listing: listingFromLocalStore
-            })
-        }
-    }, [])
+        loadQuestionToMainState()
+    }, [questions.listing[questions.activeQuestion]])
 
     const onChangeInput = (inputName: string, value: string, index?: number) => {
         const tempListing = questions.listing;
@@ -53,9 +52,6 @@ export const CreatorQuestions = () => {
     }
 
     const onCheckQuestionHandler = (): void => {
-        if(questions.listing[questions.activeQuestion].wasAdded){
-            return
-        }
         setQuestions({
             ...questions,
             errors: {}
@@ -95,9 +91,9 @@ export const CreatorQuestions = () => {
                     activeQuestion: questions.activeQuestion + 1,
                     errors: {}
                 })
-                localStorage['listing'] = JSON.stringify(questions.listing);
             }
         }
+
     };
 
     const onCheckQuestionByIndex = (index: number) => {
@@ -221,6 +217,25 @@ export const CreatorQuestions = () => {
         }
     }
 
+    function loadQuestionToMainState() {
+        if(questions.listing.length > 1 && isEmptyObject(questions.errors as Object)) {
+            const readyQuestions = questions.listing.map((question: NewQuestionBlock): QuestionBlock => {
+                return {
+                    question: question.question,
+                    answers: question.answers,
+                    rightAnswer: question.rightAnswer
+                }
+            })
+            readyQuestions.pop();
+            setNewQuizState({
+                ...newQuiz,
+                questions: readyQuestions,
+                questionCount: readyQuestions.length
+            })
+        }
+    }
+
+
     return(
         <div className="create-questions-container wrapper-bg">
             <h2>Questions</h2>
@@ -244,13 +259,20 @@ export const CreatorQuestions = () => {
                     {renderAnswers()}
                 </div>
                 <div className="mt-3">
-                    <button
-                        className={questions.listing[questions.activeQuestion].wasAdded
-                            ? "btn btn-primary mr-2 disabled"
-                            : "btn btn-primary mr-2"
-                        }
-                        onClick={() => onCheckQuestionHandler()}
-                    >Add question</button>
+                    {
+                        questions.listing[questions.activeQuestion].wasAdded
+                        ? <button
+                                className={"btn btn-primary mr-2"}
+                                onClick={() => onCheckQuestionHandler()}
+                            >Update question
+                        </button>
+                            : <button
+                                className={"btn btn-primary mr-2"}
+                                onClick={() => onCheckQuestionHandler()}
+                            >Add question
+                            </button>
+
+                    }
                     <button
                         className="btn btn-danger mr-2"
                         onClick={() => onDeleteQuestion()}
