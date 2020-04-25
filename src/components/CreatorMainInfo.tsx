@@ -3,11 +3,10 @@ import {Complexity, NewQuiz} from "../interfaces";
 
 interface CreatorMainInfoProps {
     newQuiz: NewQuiz,
-    setNewQuizState(newQuiz: NewQuiz): void
+    setNewQuizState(newQuiz: NewQuiz): void,
 }
 
 export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps) => {
-
 
     const setProgress = (): {width: number, color: string}=> {
         if(newQuiz.complexity === Complexity.easy) {
@@ -42,8 +41,8 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
                             title: e.target.value
                         })}
                     />
-                    <small className="form-text text-muted">
-                        Info or error text
+                    <small className="form-text text-danger">
+                        {newQuiz.errors?.title}
                     </small>
                 </div>
                 <div className="col-lg-6 col-12">
@@ -92,8 +91,8 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
                         })}
                     >
                     </textarea>
-                    <small className="form-text text-muted">
-                        Info or error text
+                    <small className="form-text text-danger">
+                        {newQuiz.errors?.description}
                     </small>
                 </div>
             </div>

@@ -1,3 +1,4 @@
+import {ValidateErrors} from "../helpFunctions/validateRules";
 
 export enum RightAnswer {
     one = 1,
@@ -57,6 +58,7 @@ export interface NewQuiz {
     complexity: Complexity,
     questions?: QuestionBlock[]
     questionCount?: number,
+    errors?: ValidateErrors
 }
 
 export interface QuizesState {

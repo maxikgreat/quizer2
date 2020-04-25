@@ -43,6 +43,14 @@ a {
   }
 }
 
+.btn-big {
+  padding: 10px;
+  text-transform: uppercase;
+  color: $white;
+  font-weight: bold;
+}
+
+
 .jumbotron {
   padding: 20px;
   margin: 5px;
@@ -52,12 +60,6 @@ a {
     align-items: center;
     h1 {
       margin: 0;
-    }
-    a {
-      padding: 10px;
-      text-transform: uppercase;
-      color: $white;
-      font-weight: bold;
     }
   }
 }

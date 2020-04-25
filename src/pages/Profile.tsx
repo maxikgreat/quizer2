@@ -41,7 +41,7 @@ export const Profile = ({quizesListing, loading}: ProfileProps) => {
             <div className="jumbotron jumbotron-fluid">
                 <div className="jumbotron-title mb-3">
                     <h1 className="display-4">Welcome, <span className="text-primary">bla bla</span></h1>
-                    <Link to="/quiz-creator" className="btn btn-primary">Create quiz</Link>
+                    <Link to="/quiz-creator" className="btn btn-primary btn-big">Create quiz</Link>
                 </div>
                 <Finder
                     title="Find quiz"
