@@ -5,6 +5,7 @@ import { useTransition, useChain, animated, config } from "react-spring";
 
 interface SidebarProps {
     show: boolean,
+    setVisible(show: boolean): void
 }
 
 interface Link {
@@ -12,7 +13,7 @@ interface Link {
     title: string
 }
 
-export const Sidebar = ({show}: SidebarProps) => {
+export const Sidebar = ({show, setVisible}: SidebarProps) => {
     const sidebarRef = useRef(null);
     const transition = useTransition(show, null, {
         from: {
@@ -75,6 +76,7 @@ export const Sidebar = ({show}: SidebarProps) => {
                                     <NavLink
                                         to={item.link}
                                         className="nav-link-button neon-link"
+                                        onClick={() => setVisible(false)}
                                     >{item.title}</NavLink>
                                 </animated.div>
                             ))}

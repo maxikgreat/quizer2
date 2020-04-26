@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Hamburger} from "./UI/Hamburger";
 import {Sidebar} from "./UI/Sidebar";
+import {Backdrop} from "./UI/Backdrop";
 
 export const Header = () => {
 
@@ -19,7 +20,8 @@ export const Header = () => {
                     <Hamburger show={sidebar} setVisible={setSidebar} />
                 </div>
             </header>
-            <Sidebar show={sidebar} />
+            <Sidebar show={sidebar} setVisible={setSidebar}/>
+            <Backdrop show={sidebar} setVisible={setSidebar}/>
         </>
     )
 };
