@@ -178,11 +178,18 @@ export const CreatorQuestions = ({newQuiz, setNewQuizState}: CreatorQuestionsPro
     }
 
     function renderQuestionIndexes() {
+
         return questions.listing.map((item: NewQuestionBlock, index: number): JSX.Element => {
             return (
                 <button
                     key={index}
-                    className={index === questions.activeQuestion ? "badge badge-secondary" : "badge badge-primary"}
+                    className={
+                        index === newQuiz.errors?.questions.errorIndex
+                            ? "badge badge-danger"
+                            : index === questions.activeQuestion
+                            ? "badge badge-secondary"
+                            : "badge badge-primary"
+                    }
                     onClick={() => onCheckQuestionByIndex(index)}
                 >{index + 1}</button>
             )
@@ -241,10 +248,14 @@ export const CreatorQuestions = ({newQuiz, setNewQuizState}: CreatorQuestionsPro
         }
     }
 
-
     return(
         <div className="create-questions-container wrapper-bg">
             <h2>Questions</h2>
+            {newQuiz.errors?.questions
+                ? <small className="form-text text-danger">
+                    {newQuiz.errors?.questions.message}
+                </small> : null
+            }
             <div className="p-3">
                 <div className="questions-indexes-container">
                     {renderQuestionIndexes()}

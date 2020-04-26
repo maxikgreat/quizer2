@@ -7,7 +7,6 @@ import {CreatorQuestions} from "../components/creator/CreatorQuestions";
 import {validateMain} from "../validate";
 
 export const QuizCreator = () => {
-
     const [newQuiz, setNewQuizState] = useState<NewQuiz>({
         title: '',
         description: '',
@@ -26,14 +25,15 @@ export const QuizCreator = () => {
         } else {
             setNewQuizState({
                 ...newQuiz,
-                errors: {}
+                errors: {
+                    questions: {}
+                }
             })
         }
     };
 
     return(
         <section className="quiz-creator-container">
-            {console.log(newQuiz.questions)}
             <div className="jumbotron jumbotron-fluid wrapper-bg">
                 <div className="jumbotron-title mb-3">
                     <h1 className="display-4">Quiz creator</h1>

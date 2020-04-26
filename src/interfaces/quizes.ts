@@ -50,11 +50,11 @@ export interface ActiveQuiz extends Quiz{
 }
 
 export interface NewQuiz {
-    title?: string,
-    description?: string,
+    title: string,
+    description: string,
     complexity: Complexity,
-    questions?: QuestionBlock[]
-    questionCount?: number,
+    questions: QuestionBlock[]
+    questionCount: number,
     errors?: ValidateErrorsMain
 }
 

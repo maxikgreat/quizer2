@@ -40,9 +40,12 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
                             title: e.target.value
                         })}
                     />
-                    <small className="form-text text-danger">
-                        {newQuiz.errors?.title}
-                    </small>
+                    {newQuiz.errors?.title
+                        ? <small className="form-text text-danger">
+                            {newQuiz.errors?.title}
+                        </small> : null
+                    }
+
                 </div>
                 <div className="col-lg-6 col-12">
                     <h2>Complexity</h2>
@@ -90,9 +93,11 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
                         })}
                     >
                     </textarea>
-                    <small className="form-text text-danger">
-                        {newQuiz.errors?.description}
-                    </small>
+                    {newQuiz.errors?.description
+                        ? <small className="form-text text-danger">
+                            {newQuiz.errors?.description}
+                        </small> : null
+                    }
                 </div>
             </div>
         </div>
