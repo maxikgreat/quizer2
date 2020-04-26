@@ -16,7 +16,7 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
         } else if(newQuiz.complexity === Complexity.medium) {
             return {
                 width: 50,
-                color: 'secondary'
+                color: 'warning'
             }
         } else {
             return {
@@ -30,7 +30,9 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
         <div className="main-info-container wrapper-bg">
             <div className="form-group row">
                 <div className="col-lg-6 col-12">
-                    <h2>Title</h2>
+                    <div className="h-neon">
+                        <h2>Title</h2>
+                    </div>
                     <input
                         type="text"
                         className="form-control form-control-lg"
@@ -66,7 +68,7 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
                             })}
                         >Easy</button>
                         <button
-                            className="btn btn-secondary"
+                            className="btn btn-warning"
                             onClick={() => setNewQuizState({
                                 ...newQuiz,
                                 complexity: Complexity.medium

@@ -1,21 +1,25 @@
-import React from 'react';
-import {Link, NavLink} from 'react-router-dom';
-import logoNav from '../assets/images/quiz_logo.png';
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
+import {Hamburger} from "./UI/Hamburger";
+import {Sidebar} from "./UI/Sidebar";
 
 export const Header = () => {
+
+    const [sidebar, setSidebar] = useState<boolean>(false);
+
     return(
-        <header>
-            <div className="navbar navbar-expand-lg navbar-light">
-                <div className="navbar-brand">
-                    <Link to='/'>
-                        <img src={logoNav} alt="Logo" />
-                    </Link>
+        <>
+            <header>
+                <div className="navbar navbar-expand-lg navbar-light">
+                    <div className="navbar-brand">
+                        <Link to='/'>
+                            Quizer
+                        </Link>
+                    </div>
+                    <Hamburger show={sidebar} setVisible={setSidebar} />
                 </div>
-                <nav className="mr-auto">
-                    <NavLink exact activeClassName='active' to = '/' className='btn btn-outline-primary mr-2'>Quizes</NavLink>
-                    <NavLink activeClassName='active' to = '/profile' className='btn btn-outline-primary'>Profile</NavLink>
-                </nav>
-            </div>
-        </header>
+            </header>
+            <Sidebar show={sidebar} />
+        </>
     )
 };

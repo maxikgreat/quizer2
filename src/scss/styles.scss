@@ -5,6 +5,7 @@
 //mixins
 @import '_mixins/box-shadow';
 @import '_mixins/transitions';
+@import '_mixins/keyframes';
 //pages
 @import '_pages/quizes';
 @import '_pages/profile';
@@ -15,6 +16,7 @@
 @import '_components/card';
 @import '_components/orderOptions';
 @import '_components/switcher';
+@import '_components/sidebar';
 
 * {
   box-sizing: border-box;
@@ -30,6 +32,7 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
   main{
     padding: 20px;
     section {
@@ -37,6 +40,7 @@ body {
     }
   }
 }
+
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
   color: #fff;
   background-color: $secondary;
@@ -84,5 +88,7 @@ a {
 button.btn {
   font-weight: bold;
 }
+
+
 
 @import 'respo';

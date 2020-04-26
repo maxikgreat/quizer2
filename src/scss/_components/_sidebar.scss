@@ -1,0 +1,42 @@
+.sidebar {
+  position: absolute;
+  height: calc(100vh - 50px);
+  width: 300px;
+  background-color: rgba(0,0,0,0.92);
+  border-right: 2px solid $primary;
+  @include box-shadow(5px, 5px, 5px, 0px, $primary);
+  padding: 20px 10px 10px;
+  z-index: 20;
+  div {
+    display: flex;
+    justify-content: center;
+    .nav-link-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $secondary;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 20px;
+      width: 200px;
+      height: 40px;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      @include transition(all 0.3s);
+      &:hover{
+        color: $white;
+        text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 5px #fff, 0 0 10px #ff00de, 0 0 15px #ff00de, 0 0 20px #ff00de, 0 0 25px #ff00de, 0 0 30px #ff00de;
+      }
+    }
+    .neon-link {
+      box-shadow: 0 0 0 3px $secondary, 0 0 10px 3px $secondary, 0 0 20px 3px $primary inset;
+      cursor: pointer;
+      @include transition(all 0.3s);
+    }
+    .neon-link:hover, .neon-link:active, .neon-link:focus {
+      box-shadow: 0 0 0 6px $secondary, 0 0 25px 6px $secondary, 0 0 25px 3px $primary inset;
+    }
+  }
+
+}
