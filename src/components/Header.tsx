@@ -8,6 +8,12 @@ export const Header = () => {
 
     const [sidebar, setSidebar] = useState<boolean>(false);
 
+    if(sidebar) {
+        document.body.style.overflowY = 'hidden';
+    } else {
+        document.body.style.overflowY = 'scroll';
+    }
+
     return(
         <>
             <header>

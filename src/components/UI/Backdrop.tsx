@@ -9,7 +9,7 @@ interface BackdropProps {
 export const Backdrop = ({show, setVisible}: BackdropProps) => {
 
     const props = useSpring({
-        to: show ? {opacity: 1} : {opacity: 0},
+        to: show ? {opacity: 1, display: 'block'} : {opacity: 0, display: 'none'},
         config: config.stiff
     })
 

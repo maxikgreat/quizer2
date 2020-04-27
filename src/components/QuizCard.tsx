@@ -37,7 +37,7 @@ export const QuizCard = ({id, title, description, complexity,
 
     return(
         <div className="card col-lg-6">
-            <div className="card-body">
+            <div className="card-body border-neon-primary">
                 <div className="card-title">
                     <h3>{title}</h3>
                     <span

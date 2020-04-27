@@ -41,7 +41,7 @@ export const QuizListing = ({quizesListing, loading}: QuizListingProps) => {
 
     return(
         <section className="quiz-listing">
-            <div className="jumbotron jumbotron-fluid wrapper-bg">
+            <div className="jumbotron jumbotron-fluid wrapper-bg border-neon-primary">
                 <div className="jumbotron-title mb-3">
                     <h1 className="display-4">Quiz listing</h1>
                 </div>

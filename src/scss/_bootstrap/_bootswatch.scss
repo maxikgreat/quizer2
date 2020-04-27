@@ -75,6 +75,7 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400
 // Buttons =====================================================================
 
 .btn {
+
   &-primary {
     border-color: darken($primary, 5%);
   }
@@ -108,6 +109,10 @@ $web-font-path: "https://fonts.googleapis.com/css?family=Open+Sans:300italic,400
   &-dark {
     border-color: darken($dark, 5%);
   }
+}
+
+.btn-outline {
+  border-width: 3px;
 }
 
 .btn-group {

@@ -52,7 +52,7 @@ export const OrderOptions = ({order, setOrder}: OrderOptionsProps) => {
     return(
         <>
             <div className="order-options-header">
-                <h3>Order by: </h3>
+                <h3 className="neon-text-small">Order by: </h3>
                 <Switcher
                     optionsLabel={order.direction}
                     onSwitchHandler={onSwitchOrder}

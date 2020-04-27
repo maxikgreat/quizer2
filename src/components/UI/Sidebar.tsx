@@ -74,8 +74,9 @@ export const Sidebar = ({show, setVisible}: SidebarProps) => {
                             {trail.map(({ item, key, props }) => (
                                 <animated.div key={key} style={props}>
                                     <NavLink
+                                        exact
                                         to={item.link}
-                                        className="nav-link-button neon-link"
+                                        className="nav-link-button neon-hover"
                                         onClick={() => setVisible(false)}
                                     >{item.title}</NavLink>
                                 </animated.div>

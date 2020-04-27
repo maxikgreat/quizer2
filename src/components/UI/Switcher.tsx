@@ -10,8 +10,8 @@ export const Switcher = ({optionsLabel, onSwitchHandler}: SwitcherProps) => {
     return(
         <div className="switcher-container">
             {optionsLabel
-                ? <span className="text-primary-darken">ASC</span>
-                : <span className="text-secondary-darken">DESC</span>
+                ? <span className="text-white">ASC</span>
+                : <span className="text-secondary">DESC</span>
             }
             <label className="switcher">
                 <input type="checkbox" onClick = {() => onSwitchHandler()} />
