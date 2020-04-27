@@ -22,13 +22,21 @@ export interface GetActiveQuizAction {
     payload: ActiveQuiz
 }
 
+export interface AddNewQuizSuccessAction {
+    type: ActionTypes.addNewQuizSuccess
+}
+
+export interface AddNewQuizErrorAction {
+    type: ActionTypes.addNewQuizError
+}
+
 export const fetchQuizes = () => {
     return async (dispatch: Dispatch) => {
         dispatch<ShowLoaderAction>({
             type: ActionTypes.showLoader
         });
             const response = await firebase.database().ref('/quizes');
-            response.once('value', snapshot => {
+            response.on('value', snapshot => {
                 const data = snapshot.val();
                 const parsedData: Quiz[] = [];
                 for(let quiz in data){
@@ -52,9 +60,7 @@ export const fetchQuizes = () => {
                 dispatch<HideLoaderAction>({
                     type: ActionTypes.hideLoader
                 });
-            }, errorObject => {
-                console.log(errorObject.message);
-            });
+            })
 
     }
 };
@@ -84,3 +90,29 @@ export const getActiveQuiz = (id: string) => {
         });
     }
 };
+
+export const addNewQuiz = (quiz: ActiveQuiz) => {
+    return async (dispatch: Dispatch) => {
+        await firebase.database().ref(`/quizes/${quiz.id}`)
+            .set({
+                title: quiz.title,
+                description: quiz.description,
+                author: quiz.author,
+                complexity: quiz.complexity,
+                questionCount: quiz.questionCount,
+                questions: quiz.questions,
+                timeCreated: quiz.timeCreated.getTime(),
+                bestResult: quiz.bestResult
+            })
+            .then(() => {
+                dispatch<AddNewQuizSuccessAction>({
+                    type: ActionTypes.addNewQuizSuccess
+                })
+            })
+            .catch((e) => {
+                dispatch<AddNewQuizErrorAction>({
+                    type: ActionTypes.addNewQuizError
+                })
+            })
+    }
+}

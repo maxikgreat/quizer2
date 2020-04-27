@@ -1,5 +1,6 @@
 $neon-text-big: 0 0 1px #fff, 0 0 3px #fff, 0 0 4px #fff, 0 0 8px #ff00de, 0 0 13px #ff00de, 0 0 15px #ff00de, 0 0 20px #ff00de, 0 0 25px #ff00de;
 $neon-text-small: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 6px #ff00de, 0 0 9px #ff00de, 0 0 12px #ff00de, 0 0 15px #ff00de, 0 0 20px #ff00de;
+$neon-text-very-small: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 3px #ff00de, 0 0 4px #ff00de, 0 0 0px #ff00de, 0 0 0px #ff00de, 0 0 0px #ff00de;
 .neon-text-big {
   color: $white;
   text-shadow: $neon-text-big;
@@ -9,16 +10,24 @@ $neon-text-small: 0 0 1px #fff, 0 0 2px #fff, 0 0 3px #fff, 0 0 6px #ff00de, 0 0
   text-shadow: $neon-text-small;
 }
 
+.neon-text-very-small {
+  color: $white;
+  text-shadow: $neon-text-very-small;
+}
+
 .border-neon-primary {
-  @include box-shadow(0, 0, 10px, 3px, $primary);
+  @include box-shadow(0, 0, 7px, 5px, $primary);
 }
 
 .border-neon-secondary {
-  @include box-shadow(0, 0, 10px, 3px, $secondary);
+  @include box-shadow(0, 0, 7px, 5px, $secondary);
 }
 
 .neon-hover {
   box-shadow: 0 0 0 3px $secondary, 0 0 10px 3px $secondary, 0 0 20px 3px $primary inset;
+  &-red {
+    box-shadow: 0 0 0 3px $danger, 0 0 10px 3px $danger, 0 0 20px 3px $danger inset;
+  }
 }
 .neon-hover:hover, .neon-hover:active, .neon-hover:focus {
   color: $white;

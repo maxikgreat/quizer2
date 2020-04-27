@@ -216,7 +216,7 @@ export const CreatorQuestions = ({newQuiz, setNewQuizState}: CreatorQuestionsPro
             return Object.values(questions.errors as Object).map((error: string, index: number): JSX.Element => {
                 return(
                     <span
-                        className="text-danger mr-2 error-text"
+                        className="mr-2 neon-text-very-small"
                         key={index}
                     >{error}</span>
                 )
@@ -249,10 +249,10 @@ export const CreatorQuestions = ({newQuiz, setNewQuizState}: CreatorQuestionsPro
     }
 
     return(
-        <div className="create-questions-container wrapper-bg">
-            <h2>Questions</h2>
+        <div className="create-questions-container wrapper-bg border-neon-primary">
+            <h2 className="neon-text-small">Questions</h2>
             {newQuiz.errors?.questions
-                ? <small className="form-text text-danger">
+                ? <small className="form-text">
                     {newQuiz.errors?.questions.message}
                 </small> : null
             }

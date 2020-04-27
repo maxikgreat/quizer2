@@ -27,12 +27,10 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
     }
 
     return(
-        <div className="main-info-container wrapper-bg">
+        <div className="main-info-container wrapper-bg border-neon-primary">
             <div className="form-group row">
                 <div className="col-lg-6 col-12">
-                    <div className="h-neon">
-                        <h2>Title</h2>
-                    </div>
+                    <h2 className="neon-text-small">Title</h2>
                     <input
                         type="text"
                         className="form-control form-control-lg"
@@ -43,14 +41,14 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
                         })}
                     />
                     {newQuiz.errors?.title
-                        ? <small className="form-text text-danger">
+                        ? <small className="form-text">
                             {newQuiz.errors?.title}
                         </small> : null
                     }
 
                 </div>
                 <div className="col-lg-6 col-12">
-                    <h2>Complexity</h2>
+                    <h2 className="neon-text-small">Complexity</h2>
                     <div className="progress">
                         <div
                             className={`progress-bar progress-bar-striped bg-${setProgress().color}`}
@@ -84,7 +82,7 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
                     </div>
                 </div>
                 <div className="col-12">
-                    <h2>Description</h2>
+                    <h2 className="neon-text-small">Description</h2>
                     <textarea
                         className="form-control"
                         rows={3}
@@ -96,7 +94,7 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
                     >
                     </textarea>
                     {newQuiz.errors?.description
-                        ? <small className="form-text text-danger">
+                        ? <small className="form-text">
                             {newQuiz.errors?.description}
                         </small> : null
                     }

@@ -4,7 +4,7 @@ export function sort(order: OrderFull, collection: Quiz[]): Quiz[] {
     switch(order.type){
         case OrderType.dataCreated:
             collection.sort((leftHand, rightHand) => {
-                return leftHand.timeCreated > rightHand.timeCreated ? 1 : -1
+                return leftHand.timeCreated > rightHand.timeCreated ? -1 : 1
             });
             return order.direction ? collection.reverse() : collection;
         case OrderType.questions:

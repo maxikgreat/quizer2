@@ -10,12 +10,12 @@ const initialState: QuizesState = {
 export const quizesReducer = (state = initialState, action: Action) => {
     switch (action.type) {
         case ActionTypes.showLoader:
-            return{
+            return {
                 ...state,
                 loading: true
             };
         case ActionTypes.hideLoader:
-            return{
+            return {
                 ...state,
                 loading: false
             };
@@ -25,7 +25,7 @@ export const quizesReducer = (state = initialState, action: Action) => {
                 quizesList: action.payload
             };
         case ActionTypes.getActiveQuiz:
-            return{
+            return {
                 ...state,
                 activeQuiz: action.payload
             };

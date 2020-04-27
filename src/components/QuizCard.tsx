@@ -23,7 +23,7 @@ export const QuizCard = ({id, title, description, complexity,
             case Complexity.easy:
                 return 'success';
             case Complexity.medium:
-                return 'secondary';
+                return 'warning';
             case Complexity.hard:
                 return 'danger';
             default:
@@ -32,7 +32,7 @@ export const QuizCard = ({id, title, description, complexity,
     }
 
     function setDateCreated(): string {
-        return `${timeCreated.getHours()}:${timeCreated.getMinutes()}:${timeCreated.getSeconds()} | ${timeCreated.getDay()} ${getMonthName(timeCreated)} ${timeCreated.getFullYear()}`
+        return `${timeCreated.getHours()}:${timeCreated.getMinutes()}:${timeCreated.getSeconds()} | ${timeCreated.getDate()} ${getMonthName(timeCreated)} ${timeCreated.getFullYear()}`
     }
 
     return(

@@ -16,7 +16,7 @@ interface TransformationConfig {
 export const Hamburger = ({show, setVisible}: HamburgerProps) => {
     const props = useSpring({
         transform: show ? 'rotate(0)' : 'rotate(360deg)',
-        color: show ? '#FFAADE' : '#FF00DE'
+        color: show ? '#FF00DE' : '#FF00DE'
         //@ts-ignore
     }, config.stiff);
 

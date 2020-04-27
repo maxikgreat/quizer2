@@ -19,7 +19,6 @@
 @import '_components/sidebar';
 @import '_components/neon';
 
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -38,6 +37,7 @@ body {
   main{
     padding: 20px;
     section {
+      margin-top: $header-height;
       position: absolute;
       width: 100%;
       padding-bottom: 100px;
@@ -63,6 +63,25 @@ a {
   }
 }
 
+.input-group-text {
+  border: none;
+}
+
+input, textarea {
+  border: none !important;
+  color: $white !important;
+  text-shadow: $neon-text-very-small;
+  background-color: $primary-light !important;
+}
+input:focus, textarea:focus {
+  color: $white !important;
+}
+
+small {
+  color: $white;
+  text-shadow: $neon-text-very-small;
+}
+
 .btn-big {
   padding: 15px;
   text-transform: uppercase;
@@ -73,6 +92,7 @@ a {
   h1 {
     text-shadow: $neon-text-big;
     color: $white;
+    font-weight: bold;
   }
   padding: 20px;
   margin-bottom: 20px;

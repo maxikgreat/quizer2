@@ -23,7 +23,6 @@ export const Finder = ({title, finder, setFinder}: FinderProps) => {
                 className="form-control"
                 aria-label="Default"
                 aria-describedby="finder"
-                placeholder="Start typing..."
                 value={finder}
                 onChange = {e => changeHandle(e.target.value)}
             />

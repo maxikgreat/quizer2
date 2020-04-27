@@ -1,5 +1,7 @@
 header {
   @include box-shadow(0px, 5px, 5px, 0px, $primary);
+  position: fixed;
+  width: 100%;
   background: url("../../assets/images/header.jpg");
   background-position-x: center;
   height: $header-height;
@@ -33,9 +35,9 @@ header {
 .backdrop-container {
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   background: rgba(0,0,0,0.7);
-  z-index: 10;
+  z-index: 5;
 }
 
 @include keyframes(neon) {
