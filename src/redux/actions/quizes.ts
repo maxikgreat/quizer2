@@ -3,6 +3,7 @@ import {Dispatch} from "redux";
 import {ActionTypes} from "./types";
 import {ActiveQuiz, Quiz} from "../../interfaces";
 import firebase from "../../firebase";
+import {FirebaseError} from 'firebase';
 
 export interface ShowLoaderAction {
     type: ActionTypes.showLoader
@@ -22,12 +23,21 @@ export interface GetActiveQuizAction {
     payload: ActiveQuiz
 }
 
-export interface AddNewQuizSuccessAction {
-    type: ActionTypes.addNewQuizSuccess
+export interface ShowModalAction {
+    type: ActionTypes.showModal,
+    payload: {[key: string]: string}
 }
 
-export interface AddNewQuizErrorAction {
-    type: ActionTypes.addNewQuizError
+export interface HideModalAction {
+    type: ActionTypes.hideModal
+}
+
+export const hideModal = () => {
+    return (dispatch: Dispatch) => {
+        dispatch<HideModalAction>({
+            type: ActionTypes.hideModal
+        })
+    }
 }
 
 export const fetchQuizes = () => {
@@ -35,33 +45,42 @@ export const fetchQuizes = () => {
         dispatch<ShowLoaderAction>({
             type: ActionTypes.showLoader
         });
-            const response = await firebase.database().ref('/quizes');
-            response.on('value', snapshot => {
-                const data = snapshot.val();
-                const parsedData: Quiz[] = [];
-                for(let quiz in data){
-                    if(data.hasOwnProperty(quiz)){
-                        parsedData.push({
-                            id: quiz,
-                            title: data[quiz].title,
-                            author: data[quiz].author,
-                            description: data[quiz].description,
-                            complexity: data[quiz].complexity,
-                            questionCount: parseInt(data[quiz].questionCount),
-                            timeCreated: new Date(data[quiz].timeCreated),
-                            bestResult: parseInt(data[quiz].bestResult)
-                        });
-                    }
+        const response = await firebase.database().ref('/quizes');
+        response.on('value', snapshot => {
+            const data = snapshot.val();
+            const parsedData: Quiz[] = [];
+            for(let quiz in data){
+                if(data.hasOwnProperty(quiz)){
+                    parsedData.push({
+                        id: quiz,
+                        title: data[quiz].title,
+                        author: data[quiz].author,
+                        description: data[quiz].description,
+                        complexity: data[quiz].complexity,
+                        questionCount: parseInt(data[quiz].questionCount),
+                        timeCreated: new Date(data[quiz].timeCreated),
+                        bestResult: parseInt(data[quiz].bestResult)
+                    });
                 }
-                dispatch<FetchQuizesAction>({
-                    type: ActionTypes.fetchQuizes,
-                    payload: parsedData
-                });
-                dispatch<HideLoaderAction>({
-                    type: ActionTypes.hideLoader
-                });
+            }
+            dispatch<FetchQuizesAction>({
+                type: ActionTypes.fetchQuizes,
+                payload: parsedData
+            });
+            dispatch<HideLoaderAction>({
+                type: ActionTypes.hideLoader
+            });
+        }, (errorObject: FirebaseError) => {
+            dispatch<ShowModalAction>({
+                type: ActionTypes.showModal,
+                payload: {
+                    error: errorObject.message
+                }
             })
-
+            dispatch<HideLoaderAction>({
+                type: ActionTypes.hideLoader
+            });
+        })
     }
 };
 
@@ -85,8 +104,13 @@ export const getActiveQuiz = (id: string) => {
                     bestResult: data.bestResult
                 }
             })
-        }, errorObject => {
-            console.log(errorObject.message);
+        }, (errorObject: FirebaseError) => {
+            dispatch<ShowModalAction>({
+                type: ActionTypes.showModal,
+                payload: {
+                    error: errorObject.message
+                }
+            })
         });
     }
 };
@@ -105,13 +129,19 @@ export const addNewQuiz = (quiz: ActiveQuiz) => {
                 bestResult: quiz.bestResult
             })
             .then(() => {
-                dispatch<AddNewQuizSuccessAction>({
-                    type: ActionTypes.addNewQuizSuccess
+                dispatch<ShowModalAction>({
+                    type: ActionTypes.showModal,
+                    payload: {
+                        message: 'New quiz was successfully added'
+                    }
                 })
             })
-            .catch((e) => {
-                dispatch<AddNewQuizErrorAction>({
-                    type: ActionTypes.addNewQuizError
+            .catch((e: FirebaseError) => {
+                dispatch<ShowModalAction>({
+                    type: ActionTypes.showModal,
+                    payload: {
+                        error: e.message
+                    }
                 })
             })
     }

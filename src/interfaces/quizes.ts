@@ -71,6 +71,10 @@ export interface NewQuestionBlocks {
 
 export interface QuizesState {
     loading: boolean,
+    modal: {
+        message?: string,
+        error?: string
+    }
     quizesList: Quiz[],
     activeQuiz: ActiveQuiz | null
 }

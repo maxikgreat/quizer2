@@ -1,6 +1,5 @@
-
-import React, {useState, useEffect} from 'react';
-import {NewQuestionBlocks, NewQuestionBlock, RightAnswer, NewQuiz, QuestionBlock} from "../../interfaces";
+import React, {useEffect, useState} from 'react';
+import {NewQuestionBlock, NewQuestionBlocks, NewQuiz, QuestionBlock, RightAnswer} from "../../interfaces";
 import {CreatorAnswer} from "./CreatorAnswer";
 import {validateQuestion} from "../../validate";
 import {isEmptyObject} from "../../helpFunctions";
@@ -13,9 +12,9 @@ interface CreatorQuestionsProps {
 export const CreatorQuestions = ({newQuiz, setNewQuizState}: CreatorQuestionsProps) => {
     const [questions, setQuestions] = useState<NewQuestionBlocks>({
         listing: [{
-            question: '',
-            answers: ['', '', '', ''],
-            rightAnswer: undefined,
+            question: '1',
+            answers: ['1', '1', '1', '1'],
+            rightAnswer: RightAnswer.two,
             wasAdded: false
         }],
         activeQuestion: 0,

@@ -16,11 +16,11 @@ $neon-text-very-small: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 3px #ff00de
 }
 
 .border-neon-primary {
-  @include box-shadow(0, 0, 7px, 5px, $primary);
+  @include box-shadow(0, 0, 6px, 3px, $primary);
 }
 
 .border-neon-secondary {
-  @include box-shadow(0, 0, 7px, 5px, $secondary);
+  @include box-shadow(0, 0, 6px, 3px, $secondary);
 }
 
 .neon-hover {

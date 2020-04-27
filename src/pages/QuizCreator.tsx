@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {CreatorMainInfo} from "../components/creator/CreatorMainInfo";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {ActiveQuiz, Complexity, NewQuiz} from "../interfaces";
 import {isEmptyObject} from "../helpFunctions";
@@ -10,6 +10,7 @@ import {addNewQuiz} from "../redux/actions";
 
 export const QuizCreator = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [newQuiz, setNewQuizState] = useState<NewQuiz>({
         title: '',
@@ -45,6 +46,8 @@ export const QuizCreator = () => {
                 timeCreated: new Date()
             }
             dispatch(addNewQuiz(readyQuiz));
+
+            history.push('/profile');
         }
     };
 

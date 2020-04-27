@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {QuizesState, SummaryState} from "./interfaces";
 import {fetchQuizes} from "./redux/actions";
 import {QuizCreator} from "./pages/QuizCreator";
+import {Modal} from "./components/UI/Modal";
 
 export const App = () => {
 
@@ -29,6 +30,11 @@ export const App = () => {
 
     return(
         <>
+            <Modal
+                messages={{
+                    quiz: quizes.modal
+                }}
+            />
             <Header />
             <main>
                 {transitions.map(({item, props, key}) => (

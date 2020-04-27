@@ -1,0 +1,24 @@
+.modal-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.95);
+  z-index: 90;
+  .modal-window {
+    @include transition(all .3s);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .modal-title {
+      margin: 0px 0px 10px 0px;
+      font-size: 40px;
+    }
+    button {
+      margin-top: 30px;
+    }
+  }
+}
