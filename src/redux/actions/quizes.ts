@@ -86,6 +86,9 @@ export const fetchQuizes = () => {
 
 export const getActiveQuiz = (id: string) => {
     return async (dispatch: Dispatch) => {
+        dispatch<ShowLoaderAction>({
+            type: ActionTypes.showLoader
+        });
         const response = await firebase.database().ref(`/quizes/${id}`);
         response.once('value', snapshot => {
             const data = snapshot.val();
@@ -104,6 +107,9 @@ export const getActiveQuiz = (id: string) => {
                     bestResult: data.bestResult
                 }
             })
+            dispatch<HideLoaderAction>({
+                type: ActionTypes.hideLoader
+            });
         }, (errorObject: FirebaseError) => {
             dispatch<ShowModalAction>({
                 type: ActionTypes.showModal,
@@ -111,6 +117,9 @@ export const getActiveQuiz = (id: string) => {
                     error: errorObject.message
                 }
             })
+            dispatch<HideLoaderAction>({
+                type: ActionTypes.hideLoader
+            });
         });
     }
 };

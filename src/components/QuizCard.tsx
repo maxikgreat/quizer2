@@ -1,6 +1,7 @@
 import React from 'react';
 import {Complexity} from "../interfaces";
 import {getMonthName} from "../helpFunctions";
+import {Link} from "react-router-dom";
 
 interface QuizCardProps {
     key: string,
@@ -32,11 +33,16 @@ export const QuizCard = ({id, title, description, complexity,
     }
 
     function setDateCreated(): string {
-        return `${timeCreated.getHours()}:${timeCreated.getMinutes()}:${timeCreated.getSeconds()} | ${timeCreated.getDate()} ${getMonthName(timeCreated)} ${timeCreated.getFullYear()}`
+        return `${timeCreated.getHours()}:
+        ${timeCreated.getMinutes()}:
+        ${timeCreated.getSeconds()} | 
+        ${timeCreated.getDate()} 
+        ${getMonthName(timeCreated)} 
+        ${timeCreated.getFullYear()}`
     }
 
     return(
-        <div className="card col-lg-6">
+        <Link to={`/quiz/${id}`} className="card col-lg-6">
             <div className="card-body border-neon-primary">
                 <div className="card-title">
                     <h3>{title}</h3>
@@ -66,6 +72,6 @@ export const QuizCard = ({id, title, description, complexity,
                     }
                 </div>
             </div>
-        </div>
+        </Link>
     )
 };

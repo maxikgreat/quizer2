@@ -59,7 +59,7 @@ export const QuizCreator = () => {
                     <div className="buttons-container">
                         <Link
                             to="/profile"
-                            className="btn btn-outline-danger neon-hover-red btn-big mr-3"
+                            className="btn btn-outline-danger neon-hover-red btn-big"
                         >Cancel</Link>
                         <button
                             className="btn btn-outline-secondary neon-hover btn-big"

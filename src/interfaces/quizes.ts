@@ -34,6 +34,10 @@ export interface QuestionBlock {
     rightAnswer: RightAnswer | undefined;
 }
 
+export interface QuizRouterParams {
+    id?: string | undefined
+}
+
 export interface Quiz {
     id: string,
     title: string,
