@@ -1,11 +1,32 @@
 section.active-quiz-container {
-  .questions-container{
+
+  .question-indexes {
     button {
-      position: absolute;
+      margin-right: 10px;
     }
   }
+
   .question {
     position: absolute;
-    width: 100%;
+    width: calc(100% - 10px);
+    padding: 1rem;
+  }
+
+  .answers {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .answer-hld {
+    display: flex;
+    align-items: flex-end;
+    span {
+      font-size: 20px;
+    }
+  }
+
+  .answer {
+    width: 95%;
   }
 }

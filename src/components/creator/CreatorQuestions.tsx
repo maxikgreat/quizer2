@@ -177,7 +177,6 @@ export const CreatorQuestions = ({newQuiz, setNewQuizState}: CreatorQuestionsPro
     }
 
     function renderQuestionIndexes() {
-
         return questions.listing.map((item: NewQuestionBlock, index: number): JSX.Element => {
             return (
                 <button

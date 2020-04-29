@@ -92,7 +92,6 @@ export const getActiveQuiz = (id: string) => {
         const response = await firebase.database().ref(`/quizes/${id}`);
         response.once('value', snapshot => {
             const data = snapshot.val();
-            console.log(data);
             dispatch<GetActiveQuizAction>({
                 type: ActionTypes.getActiveQuiz,
                 payload: {
