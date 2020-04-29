@@ -10,10 +10,11 @@ interface QuizQuestionProps {
     setUserAnswerState(userAnswersState: UserQuizAnswers): void,
     style: AnimatedValue<ForwardedProps<ForwardedProps<CSSProperties>>>,
     questionBlock: QuestionBlock,
+    lastQuestion: number
 }
 
 export const QuizQuestion = ({activeQuestion, userAnswersState, setActiveQuestion,
-                                 setUserAnswerState, style, questionBlock}: QuizQuestionProps) => {
+                                 setUserAnswerState, style, questionBlock, lastQuestion}: QuizQuestionProps) => {
 
     const onAnswerClickHandler = (index: number) => {
         const tempListing = userAnswersState.answersListing;
@@ -23,8 +24,9 @@ export const QuizQuestion = ({activeQuestion, userAnswersState, setActiveQuestio
             ...userAnswersState,
             answersListing: tempListing
         })
-
-        setActiveQuestion(activeQuestion + 1);
+        if(activeQuestion !== lastQuestion){
+            setActiveQuestion(activeQuestion + 1);
+        }
     }
 
 
@@ -39,7 +41,9 @@ export const QuizQuestion = ({activeQuestion, userAnswersState, setActiveQuestio
                     <span className="neon-text-very-small">{index + 1}.</span>
                     <div
                         className={
-                            "answer btn btn-primary"
+                            userAnswersState.answersListing[activeQuestion] === index
+                                ? "answer btn btn-primary neon-text-very-small neon-hover neon-text-very-small"
+                                : "answer btn btn-primary neon-text-very-small"
                         }
                     >
                         {answer}
@@ -47,6 +51,18 @@ export const QuizQuestion = ({activeQuestion, userAnswersState, setActiveQuestio
                 </div>
             )
         });
+    }
+
+    function renderEmptyQuestions() {
+        let emptyIndexes = ' ';
+        for (let i = 0; i < userAnswersState.errors.length; i++) {
+            if(i === userAnswersState.errors.length - 1) {
+                emptyIndexes+=`${userAnswersState.errors[i] + 1} `
+                break;
+            }
+            emptyIndexes+=`${userAnswersState.errors[i] + 1}, `
+        }
+        return emptyIndexes;
     }
 
     return(
@@ -58,6 +74,13 @@ export const QuizQuestion = ({activeQuestion, userAnswersState, setActiveQuestio
             <div className="answers row order-options-container btn-group btn-group-toggle">
                 {renderAnswers()}
             </div>
+            {userAnswersState.errors.length > 0
+                ? <small className="form-text mt-2">
+                    Fill answers in
+                    {renderEmptyQuestions()}
+                    questions to finish quiz!
+                </small> : null
+            }
         </animated.div>
     )
 }

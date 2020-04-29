@@ -114,13 +114,18 @@ small {
 }
 
 .jumbotron {
+  padding: 20px;
+  margin-bottom: 20px;
   h1 {
     text-shadow: $neon-text-big;
     color: $white;
     font-weight: bold;
   }
-  padding: 20px;
-  margin-bottom: 20px;
+  .buttons-jumbo-container {
+    button:first-child {
+      margin-right: 15px;
+    }
+  }
   .jumbotron-title {
     display: flex;
     justify-content: space-between;

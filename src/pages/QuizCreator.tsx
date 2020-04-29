@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {CreatorMainInfo} from "../components/creator/CreatorMainInfo";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {ActiveQuiz, Complexity, NewQuiz} from "../interfaces";
 import {isEmptyObject} from "../helpFunctions";
@@ -56,11 +56,11 @@ export const QuizCreator = () => {
             <div className="jumbotron jumbotron-fluid wrapper-bg border-neon-primary">
                 <div className="jumbotron-title">
                     <h1 className="display-4">Quiz creator</h1>
-                    <div className="buttons-container">
-                        <Link
-                            to="/profile"
+                    <div className="buttons-jumbo-container">
+                        <button
+                            onClick={() => history.goBack()}
                             className="btn btn-outline-danger neon-hover-red btn-big"
-                        >Cancel</Link>
+                        >Cancel</button>
                         <button
                             className="btn btn-outline-secondary neon-hover btn-big"
                             onClick={() => checkQuizValidation()}
