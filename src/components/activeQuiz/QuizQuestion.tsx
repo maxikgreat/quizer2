@@ -22,7 +22,8 @@ export const QuizQuestion = ({activeQuestion, userAnswersState, setActiveQuestio
 
         setUserAnswerState({
             ...userAnswersState,
-            answersListing: tempListing
+            answersListing: tempListing,
+            errors: []
         })
         if(activeQuestion !== lastQuestion){
             setActiveQuestion(activeQuestion + 1);

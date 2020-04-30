@@ -16,6 +16,7 @@ export const ActiveQuizPage = ({activeQuiz, loading}: ActiveQuizProps) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const [timer, setTimer] = useState<number>(0);
     const [activeQuestion, setActiveQuestion] = useState<number>(0);
     const [userAnswersState, setUserAnswerState] = useState<UserQuizAnswers>({
         answersListing: [],
@@ -71,6 +72,8 @@ export const ActiveQuizPage = ({activeQuiz, loading}: ActiveQuizProps) => {
                         </div>
                         <div className="questions-container">
                             <QuizQuestions
+                                timer={timer}
+                                setTimer={setTimer}
                                 activeQuestion={activeQuestion}
                                 setActiveQuestion={setActiveQuestion}
                                 userAnswersState={userAnswersState}

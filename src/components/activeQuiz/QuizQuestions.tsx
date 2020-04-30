@@ -2,8 +2,11 @@ import React from 'react';
 import {useTransition} from "react-spring";
 import {QuestionBlock, UserQuizAnswers} from "../../interfaces";
 import {QuizQuestion} from "./QuizQuestion";
+import {QuizTimer} from "./QuizTimer";
 
 interface QuizQuestionsProps {
+    timer: number,
+    setTimer(timer: number): void,
     activeQuestion: number,
     setActiveQuestion(activeQuestion: number): void,
     userAnswersState: UserQuizAnswers,
@@ -11,7 +14,7 @@ interface QuizQuestionsProps {
     questionBlocks: QuestionBlock[] | undefined
 }
 
-export const QuizQuestions = ({activeQuestion, setActiveQuestion, userAnswersState, setUserAnswerState, questionBlocks}: QuizQuestionsProps) => {
+export const QuizQuestions = ({timer, setTimer, activeQuestion, setActiveQuestion, userAnswersState, setUserAnswerState, questionBlocks}: QuizQuestionsProps) => {
     const transitions = useTransition(activeQuestion, item => item, {
         from: { opacity: 0, transform: 'translateY(100%)' },
         enter: { opacity: 1, transform: 'translateY(0)' },
@@ -28,10 +31,11 @@ export const QuizQuestions = ({activeQuestion, setActiveQuestion, userAnswersSta
                         className={
                             index === activeQuestion
                                 ? "btn btn-outline-primary neon-hover neon-text-very-small"
-                                : userAnswersState.answersListing[index]
-                                || userAnswersState.answersListing[index] === 0
+                                : typeof userAnswersState.answersListing[index] !== 'undefined'
                                     ? "btn btn-secondary"
-                                    : "btn btn-outline-primary"
+                                    : typeof userAnswersState.errors[index] !== 'undefined'
+                                        ? "btn btn-danger"
+                                        : "btn btn-outline-primary"
                         }
                     >{index + 1}</button>
                 )
@@ -45,8 +49,14 @@ export const QuizQuestions = ({activeQuestion, setActiveQuestion, userAnswersSta
                 questionBlocks
                 ?
                     <>
-                        <div className="question-indexes wrapper">
-                            {renderQuestionIndexes()}
+                        <div className="question-indexes wrapper row">
+                            <div className="col-10">
+                                {renderQuestionIndexes()}
+                            </div>
+                            <QuizTimer 
+                                timer={timer}
+                                setTimer={setTimer}
+                            />
                         </div>
                             {transitions.map(({ item, props, key }): JSX.Element => {
                                 return (
