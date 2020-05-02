@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {CreatorMainInfo} from "../components/creator/CreatorMainInfo";
 import {useHistory} from "react-router-dom";
 import {useDispatch} from "react-redux";
@@ -8,9 +8,19 @@ import {CreatorQuestions} from "../components/creator/CreatorQuestions";
 import {validateMain} from "../validate";
 import {addNewQuiz} from "../redux/actions";
 
-export const QuizCreator = () => {
+interface QuizCreatorProps {
+    logged: boolean;
+}
+
+export const QuizCreator = ({logged}: QuizCreatorProps) => {
     const dispatch = useDispatch();
     const history = useHistory();
+
+    useEffect(() => {
+        if(!logged) {
+            history.push('/login');
+        }
+    }, [])
 
     const [newQuiz, setNewQuizState] = useState<NewQuiz>({
         title: '',
@@ -41,7 +51,7 @@ export const QuizCreator = () => {
                 complexity: newQuiz.complexity,
                 questions: newQuiz.questions,
                 questionCount: newQuiz.questionCount,
-                author: "Temp Vasya",
+                author: "Admin",
                 bestResult: 0,
                 timeCreated: new Date()
             }

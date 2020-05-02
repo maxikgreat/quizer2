@@ -2,6 +2,8 @@
 import React, {useRef} from 'react';
 import {NavLink} from "react-router-dom";
 import { useTransition, useChain, animated, config } from "react-spring";
+import {useSelector} from 'react-redux';
+import { SummaryState, UserState } from '../../interfaces';
 
 interface SidebarProps {
     show: boolean,
@@ -14,6 +16,9 @@ interface Link {
 }
 
 export const Sidebar = ({show, setVisible}: SidebarProps) => {
+
+    const users: UserState = useSelector((state: SummaryState) => state.users);
+
     const sidebarRef = useRef(null);
     const transition = useTransition(show, null, {
         from: {
@@ -30,16 +35,36 @@ export const Sidebar = ({show, setVisible}: SidebarProps) => {
         ref: sidebarRef
     });
 
-    const links: Link[] = [
+
+
+    let links: Link[] = [
         {
             link: '/',
             title: 'Home'
         },
         {
-            link: '/profile',
-            title: 'Profile'
+            link: '/login',
+            title: 'Login'
         }
     ];
+
+    if(users.logged) {
+        links = [
+            {
+                link: '/',
+                title: 'Home'
+            },
+            {
+                link: '/profile',
+                title: 'Profile'
+            },
+            {
+                link: '/logout',
+                title: 'Logout'
+            }
+        ];
+    }
+
     const itemsRef = useRef(null);
     const trail = useTransition(show ? links : [], item => item.link, {
         from: {

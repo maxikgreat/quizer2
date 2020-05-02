@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Quiz} from '../interfaces';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {Loader} from "../components/UI/Loader";
 import {QuizCard} from "../components/QuizCard";
 import {Finder} from "../components/Finder";
@@ -8,10 +8,17 @@ import {filter} from "../helpFunctions";
 
 interface ProfileProps {
     quizesListing: Quiz[],
-    loading: boolean
+    loading: boolean,
+    logged: boolean
 }
 
-export const Profile = ({quizesListing, loading}: ProfileProps) => {
+export const Profile = ({quizesListing, loading, logged}: ProfileProps) => {
+    const history = useHistory();
+    useEffect(() => {
+        if(!logged) {
+            history.push('/login');
+        }
+    }, []);
 
     const [finder, setFinder] = useState<string>('');
 
@@ -40,7 +47,7 @@ export const Profile = ({quizesListing, loading}: ProfileProps) => {
         <section className="profile">
             <div className="jumbotron jumbotron-fluid wrapper-bg border-neon-primary">
                 <div className="jumbotron-title mb-3">
-                    <h1 className="display-4">Welcome, bla</h1>
+                    <h1 className="display-4">Welcome</h1>
                     <Link to="/quiz-creator" className="btn btn-outline-secondary neon-hover btn-big">Create quiz</Link>
                 </div>
                 <Finder

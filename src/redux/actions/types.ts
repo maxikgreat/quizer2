@@ -1,3 +1,4 @@
+import { ShowLoaderUserAction, HideLoaderUserAction, LoginSuccessAction, LoginErrorAction, LogoutAction } from './users';
 import {
     FetchQuizesAction,
     GetActiveQuizAction,
@@ -16,6 +17,14 @@ export enum ActionTypes {
 
     fetchQuizes = "FETCH_ALL_QUIZES",
     getActiveQuiz = "GET_ACTION_QUIZ",
+
+    showLoaderUser = "SHOW_LOADER_USER",
+    hideLoaderUser = "HIDE_LOADER_USER",
+
+    loginSuccess = "LOGIN_SUCCESS",
+    loginError = "LOGIN_ERROR",
+
+    logout = "LOGOUT"
 }
 
 export type Action = FetchQuizesAction
@@ -23,4 +32,9 @@ export type Action = FetchQuizesAction
     | ShowLoaderAction
     | HideLoaderAction
     | HideModalAction
-    | ShowModalAction;
+    | ShowModalAction
+    | ShowLoaderUserAction
+    | HideLoaderUserAction
+    | LoginSuccessAction
+    | LoginErrorAction
+    | LogoutAction;

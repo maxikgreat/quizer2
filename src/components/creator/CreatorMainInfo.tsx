@@ -45,7 +45,6 @@ export const CreatorMainInfo = ({newQuiz, setNewQuizState}: CreatorMainInfoProps
                             {newQuiz.errors?.title}
                         </small> : null
                     }
-
                 </div>
                 <div className="col-lg-6 col-12">
                     <h2 className="neon-text-small">Complexity</h2>

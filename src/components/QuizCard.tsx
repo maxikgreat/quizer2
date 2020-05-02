@@ -1,6 +1,6 @@
 import React from 'react';
 import {Complexity} from "../interfaces";
-import {getMonthName, dateFormatter} from "../helpFunctions";
+import {dateFormatter} from "../helpFunctions";
 import {useHistory} from 'react-router-dom';
 import {timerFormatter} from '../helpFunctions';
 import {useDispatch} from 'react-redux';
@@ -48,7 +48,7 @@ export const QuizCard = ({id, title, description, complexity,
                     >{complexity}</span>
                 </div>
                 <div className="card-subtitle mb-2">
-                    <span>Author: {author}</span>
+                    <span>Author:<br/>{author}</span>
                     <span>{dateFormatter(timeCreated)}</span>
                     <span>Best pass result: <br />{
                         timerFormatter(bestResult) === "00:00"
@@ -61,7 +61,6 @@ export const QuizCard = ({id, title, description, complexity,
                     {editable
                         ? <>
                             <div className="buttons-container">
-                                <button className="btn btn-secondary">Edit</button>
                                 <button 
                                     className="btn btn-danger"
                                     onClick={() => dispatch(deleteQuiz(id))}

@@ -1,15 +1,16 @@
 import React, {useContext} from 'react';
 import {animated, useTransition} from "react-spring";
 import {Redirect, Route, Switch} from "react-router-dom";
-import {QuizListing, Profile, QuizCreator, ActiveQuizPage} from "../pages";
+import {QuizListing, Profile, QuizCreator, ActiveQuizPage, Login, Logout} from "../pages";
 import {__RouterContext} from "react-router";
-import {QuizesState} from "../interfaces";
+import {QuizesState, UserState} from "../interfaces";
 
 interface RoutesProps {
-    quizes: QuizesState
+    quizes: QuizesState,
+    users: UserState
 }
 
-export const Routes = ({quizes}: RoutesProps) => {
+export const Routes = ({quizes, users}: RoutesProps) => {
     const {location} = useContext(__RouterContext);
 
     const transitions = useTransition(location, location => location.pathname, {
@@ -37,6 +38,7 @@ export const Routes = ({quizes}: RoutesProps) => {
                                        <Profile
                                            quizesListing = {quizes.quizesList}
                                            loading = {quizes.loading}
+                                           logged={users.logged}
                                        />
                                    }
                             />
@@ -48,7 +50,22 @@ export const Routes = ({quizes}: RoutesProps) => {
                                        />
                                    }
                             />
-                            <Route path='/quiz-creator' component={QuizCreator} />
+                            <Route path='/login'
+                                    render={() =>
+                                        <Login />
+                                    }
+                            />
+                            <Route path='/quiz-creator' 
+                                    render={() => 
+                                        <QuizCreator 
+                                            logged={users.logged}
+                                        />
+                                    } />
+                            <Route path='/logout' 
+                                    render={() =>
+                                        <Logout />
+                                    } 
+                            />
                             <Redirect to='/' />
                         </Switch>
                     </Switch>
