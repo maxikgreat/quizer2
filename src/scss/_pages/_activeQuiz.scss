@@ -39,4 +39,43 @@ section.active-quiz-container {
       display: flex;
     }
   }
+  .finished-container {
+    padding: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .finished-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .response-container {
+    padding: 1rem;
+    div {
+      font-size: 20px;
+    }
+  }
+
+  .results {
+    padding: 1rem;
+    .result {
+      padding-bottom: 10px;
+      border-bottom: 2px solid $secondary;
+      &-question {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        span {
+          font-size: 20px;
+        }
+      }
+      &-answer {
+        margin-left: 10px;
+        span {
+          margin-right: 15px;
+        }
+      }
+    }
+  }
 }

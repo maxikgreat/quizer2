@@ -25,6 +25,16 @@
         font-size: 16px;
       }
     }
+    .results {
+      padding: 0.5rem;
+      .result {
+        &-question {
+          span {
+            font-size: 18px;
+          }
+        }
+      }
+    }
   }
   .jumbotron {
     .jumbotron-title {

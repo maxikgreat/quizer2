@@ -57,7 +57,7 @@ export const Modal = ({messages}: ModalProps) => {
                        :
                        <>
                            <span className="modal-title neon-text-big">
-                               Error
+                               Error!
                            </span>
                            <span className="modal-title neon-text-big">
                                 {showError}

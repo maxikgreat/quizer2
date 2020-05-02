@@ -1,4 +1,5 @@
 import React, {CSSProperties} from 'react';
+// @ts-ignore
 import {AnimatedValue, ForwardedProps, animated} from "react-spring";
 import {QuestionBlock, UserQuizAnswers} from "../../interfaces";
 
@@ -32,7 +33,7 @@ export const QuizQuestion = ({activeQuestion, userAnswersState, setActiveQuestio
 
 
     function renderAnswers() {
-        return questionBlock.answers.map((answer: string, index: number) => {
+        return questionBlock.answers.map((answer: string, index: number): JSX.Element => {
             return (
                 <div
                     className="answer-hld col-12 col-lg-6 mt-3 p-0"
@@ -54,7 +55,7 @@ export const QuizQuestion = ({activeQuestion, userAnswersState, setActiveQuestio
         });
     }
 
-    function renderEmptyQuestions() {
+    function renderEmptyQuestions(): string {
         let emptyIndexes = ' ';
         for (let i = 0; i < userAnswersState.errors.length; i++) {
             if(i === userAnswersState.errors.length - 1) {
@@ -63,7 +64,10 @@ export const QuizQuestion = ({activeQuestion, userAnswersState, setActiveQuestio
             }
             emptyIndexes+=`${userAnswersState.errors[i] + 1}, `
         }
-        return emptyIndexes;
+        
+        return emptyIndexes.length === 3 
+        ? `Fill answers in${emptyIndexes} question to finish quiz!`
+        : `Fill answers in${emptyIndexes} questions to finish quiz!`;
     }
 
     return(
@@ -77,9 +81,7 @@ export const QuizQuestion = ({activeQuestion, userAnswersState, setActiveQuestio
             </div>
             {userAnswersState.errors.length > 0
                 ? <small className="form-text mt-2">
-                    Fill answers in
                     {renderEmptyQuestions()}
-                    questions to finish quiz!
                 </small> : null
             }
         </animated.div>

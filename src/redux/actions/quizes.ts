@@ -32,6 +32,27 @@ export interface HideModalAction {
     type: ActionTypes.hideModal
 }
 
+export const showModal = (isError: boolean, msg: string) => {
+    return (dispatch: Dispatch) => {
+        if(isError) {
+            dispatch<ShowModalAction>({
+                type: ActionTypes.showModal,
+                payload: {
+                    error: msg
+                }
+            })
+        } else {
+            dispatch<ShowModalAction>({
+                type: ActionTypes.showModal,
+                payload: {
+                    message: msg
+                }
+            })
+        }
+        
+    }
+}
+
 export const hideModal = () => {
     return (dispatch: Dispatch) => {
         dispatch<HideModalAction>({

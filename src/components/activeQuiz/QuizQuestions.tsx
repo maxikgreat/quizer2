@@ -1,5 +1,5 @@
 import React from 'react';
-import {useTransition} from "react-spring";
+import {useTransition} from 'react-spring'
 import {QuestionBlock, UserQuizAnswers} from "../../interfaces";
 import {QuizQuestion} from "./QuizQuestion";
 import {QuizTimer} from "./QuizTimer";
@@ -21,6 +21,12 @@ export const QuizQuestions = ({timer, setTimer, activeQuestion, setActiveQuestio
         leave: { opacity: 0, transform: 'translateY(50%)' },
     })
 
+    function noAnswerQuestion(index: number): boolean {
+        if(userAnswersState.errors.find(error => error === index)) {
+            return true;
+        } else return false;
+    }
+
     function renderQuestionIndexes() {
         if(questionBlocks) {
             return questionBlocks.map((item: QuestionBlock, index: number): JSX.Element => {
@@ -33,7 +39,7 @@ export const QuizQuestions = ({timer, setTimer, activeQuestion, setActiveQuestio
                                 ? "btn btn-outline-primary neon-hover neon-text-very-small"
                                 : typeof userAnswersState.answersListing[index] !== 'undefined'
                                     ? "btn btn-secondary"
-                                    : typeof userAnswersState.errors[index] !== 'undefined'
+                                    : noAnswerQuestion(index)
                                         ? "btn btn-danger"
                                         : "btn btn-outline-primary"
                         }
@@ -58,7 +64,7 @@ export const QuizQuestions = ({timer, setTimer, activeQuestion, setActiveQuestio
                                 setTimer={setTimer}
                             />
                         </div>
-                            {transitions.map(({ item, props, key }): JSX.Element => {
+                            {transitions.map(({ item, props, key }: any): JSX.Element => {
                                 return (
                                     <QuizQuestion
                                         activeQuestion={activeQuestion}

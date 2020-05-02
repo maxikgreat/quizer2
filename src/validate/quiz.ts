@@ -11,6 +11,8 @@ export interface ValidateErrorsMain {
 
 export function validateMain(quiz: NewQuiz): ValidateErrorsMain {
 
+    const minQuestions = 5;
+
     let errors: ValidateErrorsMain = {
         questions: {}
     };
@@ -28,8 +30,8 @@ export function validateMain(quiz: NewQuiz): ValidateErrorsMain {
         errors.description = 'Description length must be in range from 3 to 150 characters!';
     }
 
-    if (quiz.questions.length === 0 || quiz.questionCount === 0) {
-        errors.questions.message = 'Quiz must contain at least 1 question!';
+    if (quiz.questions.length < minQuestions || quiz.questionCount < minQuestions) {
+        errors.questions.message = `Quiz must contain at least ${minQuestions} question!`;
     } else {
         quiz.questions.forEach((question: QuestionBlock, index: number) => {
             const checkAnswers = question.answers.every((answer:string) => answer);

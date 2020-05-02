@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
+import {timerFormatter} from '../../helpFunctions';
 
 
 interface QuizTimerProps {
@@ -8,22 +9,17 @@ interface QuizTimerProps {
 
 export const QuizTimer = ({timer, setTimer}: QuizTimerProps) => {
 
-    function formateTime(): string {
-        let formattedMinutes = new Date(timer).getMinutes();
-        let formattedSeconds = new Date(timer).getSeconds();
-        return `${formattedMinutes < 10 ? '0' + formattedMinutes : formattedMinutes}:${formattedSeconds < 10 ? '0' + formattedSeconds : formattedSeconds}`
-    }
-
+    //const quizTimeLimit = 20; //in minutes
     useEffect(() => {
-        const timerHanler = setTimeout(() => setTimer(timer + 1000), 1000)
+        const timeHandler = setTimeout(() => setTimer(timer + 1000), 1000)
         return () => {
-            clearTimeout(timerHanler)
+            clearTimeout(timeHandler)
         }
     }, [timer])
 
     return (
         <div className="quiz-timer col-2">
-            {formateTime()}
+            {timerFormatter(timer)}
         </div>
     )
 };

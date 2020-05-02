@@ -5,6 +5,7 @@ import {ActiveQuiz, QuizRouterParams, UserQuizAnswers} from "../interfaces";
 import {getActiveQuiz} from "../redux/actions";
 import {Loader} from "../components/UI/Loader";
 import {QuizQuestions} from "../components/activeQuiz/QuizQuestions";
+import {QuizFinished} from "../components/activeQuiz/QuizFinished";
 
 interface ActiveQuizProps {
     activeQuiz: ActiveQuiz | null,
@@ -16,6 +17,7 @@ export const ActiveQuizPage = ({activeQuiz, loading}: ActiveQuizProps) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const [isFinished, setFinished] = useState<boolean>(false);
     const [timer, setTimer] = useState<number>(0);
     const [activeQuestion, setActiveQuestion] = useState<number>(0);
     const [userAnswersState, setUserAnswerState] = useState<UserQuizAnswers>({
@@ -27,6 +29,7 @@ export const ActiveQuizPage = ({activeQuiz, loading}: ActiveQuizProps) => {
         if(params.id) {
             dispatch(getActiveQuiz(params.id));
         }
+        //todo no existing quiz page
     }, []);
 
     const onFinishHandle = () => {
@@ -45,6 +48,9 @@ export const ActiveQuizPage = ({activeQuiz, loading}: ActiveQuizProps) => {
                     })
                 }
             }
+            if(emptyAnswers.length === 0) {
+                setFinished(true);
+            }
         }
     }
 
@@ -53,25 +59,37 @@ export const ActiveQuizPage = ({activeQuiz, loading}: ActiveQuizProps) => {
             {
                 loading
                 ? <Loader />
-                :
+                :   
                     <>
                         <div className="jumbotron jumbotron-fluid wrapper-bg border-neon-primary">
                             <div className="jumbotron-title">
-                                <h1 className="display-4">Quiz {activeQuiz?.title}</h1>
-                                <div className="buttons-jumbo-container">
+                            <h1 className="display-4">Quiz {activeQuiz?.title}</h1>
+                            <div className="buttons-jumbo-container">
+                                {
+                                    !isFinished
+                                    ?
+                                    <>
+                                        <button
+                                            onClick={() => history.goBack()}
+                                            className="btn btn-outline-danger neon-hover-red btn-big"
+                                        >Cancel</button>
+                                        <button
+                                            onClick={() => onFinishHandle()}
+                                            className="btn btn-outline-secondary neon-hover btn-big"
+                                        >Finish</button>
+                                    </>
+                                    : 
                                     <button
-                                        onClick={() => history.goBack()}
-                                        className="btn btn-outline-danger neon-hover-red btn-big"
-                                    >Cancel</button>
-                                    <button
-                                        onClick={() => onFinishHandle()}
+                                        onClick={() => history.push('/')}
                                         className="btn btn-outline-secondary neon-hover btn-big"
-                                    >Finish</button>
-                                </div>
+                                    >Back</button>
+                                }
                             </div>
                         </div>
-                        <div className="questions-container">
-                            <QuizQuestions
+                        </div>
+                        {
+                            !isFinished
+                            ? <QuizQuestions
                                 timer={timer}
                                 setTimer={setTimer}
                                 activeQuestion={activeQuestion}
@@ -80,7 +98,12 @@ export const ActiveQuizPage = ({activeQuiz, loading}: ActiveQuizProps) => {
                                 setUserAnswerState={setUserAnswerState}
                                 questionBlocks={activeQuiz?.questions}
                             />
-                        </div>
+                            : <QuizFinished 
+                                activeQuiz={activeQuiz}
+                                timer={timer}
+                                userAnswersState={userAnswersState}
+                            />
+                        }
                     </>
             }
         </section>
