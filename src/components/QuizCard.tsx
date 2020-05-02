@@ -1,7 +1,10 @@
 import React from 'react';
 import {Complexity} from "../interfaces";
-import {getMonthName} from "../helpFunctions";
-import {Link} from "react-router-dom";
+import {getMonthName, dateFormatter} from "../helpFunctions";
+import {useHistory} from 'react-router-dom';
+import {timerFormatter} from '../helpFunctions';
+import {useDispatch} from 'react-redux';
+import {deleteQuiz} from '../redux/actions';
 
 interface QuizCardProps {
     key: string,
@@ -18,6 +21,9 @@ interface QuizCardProps {
 
 export const QuizCard = ({id, title, description, complexity,
                              author, timeCreated, bestResult, questionCount, editable}: QuizCardProps) => {
+    
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     function setComplexity(): string {
         switch (complexity) {
@@ -32,17 +38,8 @@ export const QuizCard = ({id, title, description, complexity,
         }
     }
 
-    function setDateCreated(): string {
-        return `${timeCreated.getHours()}:
-        ${timeCreated.getMinutes()}:
-        ${timeCreated.getSeconds()} | 
-        ${timeCreated.getDate()} 
-        ${getMonthName(timeCreated)} 
-        ${timeCreated.getFullYear()}`
-    }
-
     return(
-        <Link to={`/quiz/${id}`} className="card col-lg-6">
+        <div className="card col-lg-6">
             <div className="card-body border-neon-primary">
                 <div className="card-title">
                     <h3>{title}</h3>
@@ -52,8 +49,12 @@ export const QuizCard = ({id, title, description, complexity,
                 </div>
                 <div className="card-subtitle mb-2">
                     <span>Author: {author}</span>
-                    <span>{setDateCreated()}</span>
-                    <span>Best pass result: {bestResult}</span>
+                    <span>{dateFormatter(timeCreated)}</span>
+                    <span>Best pass result: <br />{
+                        timerFormatter(bestResult) === "00:00"
+                        ? 'No results'
+                        : timerFormatter(bestResult)
+                    }</span>
                 </div>
                 <p className="card-text">{description}</p>
                 <div className="card-footer">
@@ -61,17 +62,23 @@ export const QuizCard = ({id, title, description, complexity,
                         ? <>
                             <div className="buttons-container">
                                 <button className="btn btn-secondary">Edit</button>
-                                <button className="btn btn-danger">Delete</button>
+                                <button 
+                                    className="btn btn-danger"
+                                    onClick={() => dispatch(deleteQuiz(id))}
+                                >Delete</button>
                             </div>
                             <span className="questions-xs-hide">{questionCount} questions</span>
                         </>
                         : <>
-                            <button className="btn btn-secondary">Start</button>
+                            <button 
+                                className="btn btn-secondary"
+                                onClick={() => history.push(`/quiz/${id}`)}
+                            >Start</button>
                             <span className="questions">{questionCount} questions</span>
                         </>
                     }
                 </div>
             </div>
-        </Link>
+        </div>
     )
 };

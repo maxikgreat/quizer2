@@ -1,6 +1,9 @@
 import React, {useRef} from 'react';
 import {ActiveQuiz, UserQuizAnswers} from '../../interfaces';
 import {timerFormatter} from '../../helpFunctions';
+import {useDispatch} from 'react-redux';
+import {useHistory} from 'react-router-dom';
+import {updateBestResult} from '../../redux/actions'
 
 interface QuizFinishedProps {
     activeQuiz: ActiveQuiz | null,
@@ -16,8 +19,10 @@ interface ResultsInterface {
 
 export const QuizFinished = ({activeQuiz, timer, userAnswersState}: QuizFinishedProps) => {
     const willMount = useRef<boolean>(true);
-    let wrongAnswers = 0;
+    const dispatch = useDispatch();
+    const history = useHistory();
 
+    let wrongAnswers = 0;
     let results: JSX.Element[] = [];
     
     const useComponentWillMount = (func: () => JSX.Element[]) => {        
@@ -69,6 +74,13 @@ export const QuizFinished = ({activeQuiz, timer, userAnswersState}: QuizFinished
     }
 
     useComponentWillMount(() => renderCheckAnswers());
+
+    const updateResult = () => {
+        if(activeQuiz) {
+            dispatch(updateBestResult(activeQuiz.id, timer))
+            history.push('/');
+        }
+    };
     
     return (
         <>
@@ -89,6 +101,12 @@ export const QuizFinished = ({activeQuiz, timer, userAnswersState}: QuizFinished
                     </div>
                     : <div className="success neon-text-small">
                         Congratulations! You're passed this quiz.
+                        <button 
+                            className="btn btn-outline-secondary neon-hover"
+                            onClick={() => updateResult()}
+                        >
+                            Record changes
+                        </button>
                     </div>
                 }
             </div>

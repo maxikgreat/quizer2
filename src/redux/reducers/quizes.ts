@@ -1,6 +1,5 @@
 import {Action, ActionTypes} from "../actions";
 import {QuizesState} from "../../interfaces";
-import {act} from "react-dom/test-utils";
 
 const initialState: QuizesState = {
     loading: false,

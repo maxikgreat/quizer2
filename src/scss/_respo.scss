@@ -35,6 +35,16 @@
         }
       }
     }
+    .response-container {
+      .success {
+        flex-direction: column;
+        align-items: flex-start;
+        button {
+          margin-top: 10px;
+        }
+      }
+    }
+  
   }
   .jumbotron {
     .jumbotron-title {

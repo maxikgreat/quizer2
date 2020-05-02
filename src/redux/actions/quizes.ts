@@ -175,3 +175,52 @@ export const addNewQuiz = (quiz: ActiveQuiz) => {
             })
     }
 }
+
+export const updateBestResult = (quizId: string | undefined, bestResult: number) => {
+    return async (dispatch: Dispatch) => {
+        if(quizId) {
+            await firebase.database().ref(`/quizes/${quizId}`)
+            .child('bestResult')
+            .set(bestResult)
+            .then(() => {
+                dispatch<ShowModalAction>({
+                    type: ActionTypes.showModal,
+                    payload: {
+                        message: 'Your time passed was successfully added'
+                    }
+                })
+            })
+            .catch((e: FirebaseError) => {
+                dispatch<ShowModalAction>({
+                    type: ActionTypes.showModal,
+                    payload: {
+                        error: e.message
+                    }
+                })
+            })
+        }   
+    }
+}
+
+export const deleteQuiz = (quizId: string) => {
+    return async (dispatch: Dispatch) => {
+        await firebase.database().ref(`/quizes/${quizId}`)
+        .set(null)
+        .then(() => {
+            dispatch<ShowModalAction>({
+                type: ActionTypes.showModal,
+                payload: {
+                    message: 'Quiz was deleted'
+                }
+            })
+        })
+        .catch((e: FirebaseError) => {
+            dispatch<ShowModalAction>({
+                type: ActionTypes.showModal,
+                payload: {
+                    error: e.message
+                }
+            })
+        })
+    }
+}
